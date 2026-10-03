@@ -6,7 +6,7 @@
 	language: language,
 	title: "NFT-Hydroponik mit ESP32",
 	subtitle: "Automatisierter Basilikum-Demonstrator für den Schuleinsatz",
-	module: "Gebäudeatomatisation",
+	module: "Gebäudeautomatisation",
 	// Ein Eintrag je Gruppenmitglied
 	authors: (
 		(name: "Lyonel Stadthoewer", matnr: 13086),

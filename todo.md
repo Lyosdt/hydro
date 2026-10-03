@@ -12,8 +12,7 @@ noch welche offen sind.
     Schellen, Netztöpfe, 2 Plastikboxen, Schlauch, Blähton, Pflanzen) —
     „vorhanden“ geht auch
   - Nährstoffkonzentrat: Produkt, Quelle, Preis
-- [ ] **Deckblatt:** Tippfehler im Modulnamen („Gebäudeatomatisation“),
-  Matrikelnummer Antonio Steinhauer (aktuell 00000)
+- [ ] **Deckblatt:** Matrikelnummer Antonio Steinhauer (aktuell 00000)
 - [ ] **KI-Dokumentation** im Anhang (`99_anhang.typ`) ausfüllen
 
 ## Zu entscheiden
