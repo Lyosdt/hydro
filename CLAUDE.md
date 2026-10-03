@@ -140,21 +140,23 @@ USB-Netzteil 2 A ──[USB-A-Pigtail männl.]── MOSFET VIN+ / VIN−
                                    │
                               1N4007 über VOUT, Kathodenring Richtung +
 
-MOSFET VIN+ ──→ Breadboard + Schiene ──┬── 1000 µF (Streifen an −)
-MOSFET VIN− ──→ Breadboard − Schiene ──┤
-                                       ├── TDS-Modul 5 V
-                                       └── ESP32 5V / GND (Standalone-Betrieb)
+MOSFET VIN ──── 1000 µF (Streifen an −)
+
+USB-Netzteil ESP32 ──[USB]── ESP32 ── 5V-Pin ── TDS-Modul 5 V
 
 MOSFET TRIG ──── ESP32 GPIO 25
-MOSFET GND  ──── ESP32 GND
+MOSFET GND  ──── ESP32 GND   (gemeinsame Masse trotz getrennter Netzteile)
 ```
+
+**ESP32 hat ein eigenes USB-Netzteil** (vom Nutzer bestätigt). Das
+TDS-Modul hängt am 5-V-Pin des ESP32, nicht am Pumpenkreis.
 
 Drei Schutzmaßnahmen, die im Text begründet werden müssen:
 
 | Bauteil | Zweck |
 |---|---|
 | 1N4007 über der Pumpe | Freilaufdiode; die Motorspule erzeugt beim Abschalten eine Gegenspannung weit über der 25-V-Grenze des MOSFET |
-| 1000 µF an VIN | puffert den Anlaufstrom der Pumpe, damit die 5-V-Schiene nicht einbricht und den ESP32 zurücksetzt |
+| 1000 µF an VIN | puffert den Anlaufstrom der Pumpe, damit die Spannung des Pumpen-Netzteils nicht einbricht |
 | gemeinsame Masse | das MOSFET-Board schaltet low-side und benötigt denselben Bezugspunkt wie der ESP32 |
 
 **Der ESP32 führt zu keinem Zeitpunkt den Pumpenstrom.** Über GPIO 25 fließt
@@ -162,15 +164,18 @@ nur der Gate-Steuerstrom im Mikroampere-Bereich.
 
 ### Strombilanz
 
-| Verbraucher | Aufnahme |
-|---|---|
-| Pumpe, Betrieb | ~0,5 A |
-| Pumpe, Anlauf (kurz) | +1,0 A Spitze |
-| ESP32 | 0,08–0,25 A |
-| TDS-Modul | 0,01 A |
-| DS18B20 + Füllstandssensor | <0,01 A |
-| 3 Status-LEDs | 0,02 A |
-| **Summe am USB-Netzteil** | **0,61–0,79 A, Spitze max. ~1,8 A** (vom Nutzer bestätigt) |
+| Netzteil | Verbraucher | Aufnahme |
+|---|---|---|
+| Pumpe (5 V / 2 A) | Pumpe, Betrieb | ~0,5 A |
+| | Pumpe, Anlauf (kurz) | +1,0 A Spitze → max. ~1,5 A |
+| ESP32 | ESP32 | 0,08–0,25 A |
+| | TDS-Modul | 0,01 A |
+| | DS18B20 + Füllstandssensor | <0,01 A |
+| | 3 Status-LEDs | 0,02 A |
+| | **Summe** | **~0,11–0,29 A** |
+
+Die Einzelwerte sind vom Nutzer bestätigt, die Summen wurden nach der Trennung
+der Netzteile neu gerechnet.
 
 Das Growlight (2 A) läuft über sein eigenes Netzteil und geht nicht in diese
 Bilanz ein.

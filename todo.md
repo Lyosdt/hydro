@@ -8,6 +8,7 @@ noch welche offen sind.
 
 - [ ] **Stückliste** (`03_stueckliste.typ`)
   - Anzahl der Schraubschellen
+  - USB-Netzteil des ESP32: Bezugsquelle und Preis („vorhanden“?)
   - Bezugsquelle und Preis für Mechanik und Pflanzen (Holzbretter, Rohr,
     Schellen, Netztöpfe, 2 Plastikboxen, Schlauch, Blähton, Pflanzen) —
     „vorhanden“ geht auch

@@ -27,6 +27,7 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
       (bezeichnung: "Status-LED", typ: "grün, gelb, rot", anzahl: 3, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Vorwiderstand LED", typ: "220 Ω", anzahl: 3, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Steckbrett", typ: "Breadboard", anzahl: 1, quelle: "Amazon", preis: 9.99),
+      (bezeichnung: "USB-Netzteil", typ: "Versorgung ESP32, mit USB-Kabel", anzahl: 1, quelle: none, preis: none),
       (bezeichnung: "Jumperwire", typ: "Jumperwire für Breadboard F-F, F-M, M-M", anzahl: 1, quelle: "Amazon", preis: 6.99),
 
       "Sensorik",
@@ -38,7 +39,7 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
       "Leistungspfad Pumpe",
       (bezeichnung: "Schaltmodul", typ: "MOSFET-Board P2003BDG, N-Kanal, Logic Level", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Wasserpumpe", typ: "5 V, USB-A-Stecker", anzahl: 1, quelle: "Amazon", preis: 8.95),
-      (bezeichnung: "USB-Netzteil", typ: "5 V, 2 A", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "USB-Netzteil", typ: "5 V, 2 A, Versorgung Pumpe", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "USB-A-Pigtail", typ: "Stecker (männlich), Netzteilseite & Buchse (weiblich), Pumpenseite", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Freilaufdiode", typ: "1N4007", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Elektrolytkondensator", typ: "1000 µF", anzahl: 1, quelle: "vorhanden", preis: 0),

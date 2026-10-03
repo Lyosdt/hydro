@@ -52,11 +52,11 @@ Wurzeln lang genug für den Einsatz in die Netztöpfe waren.
 
 == Schaltplan und Leistungspfad <kap-schaltplan>
 
-Die Schaltung besteht aus drei Kreisen (@fig-leistungspfad): dem Lichtkreis,
-dem Leistungspfad der Pumpe und dem Steuerkreis um den ESP32. Der Lichtkreis
-ist vollständig getrennt. Das Growlight wird über ein eigenes Netzteil versorgt
-und durch seinen internen Timer geschaltet; es besteht keine Verbindung zum
-ESP32.
+Die Schaltung besteht aus drei Kreisen mit je einem eigenen Netzteil
+(@fig-leistungspfad): dem Leistungspfad der Pumpe, dem Steuerkreis um den
+ESP32 und dem Lichtkreis. Der Lichtkreis ist vollständig getrennt. Das
+Growlight wird durch seinen internen Timer geschaltet; es besteht keine
+Verbindung zum ESP32.
 
 #figure(
   {
@@ -67,38 +67,37 @@ ESP32.
       node-corner-radius: 2pt,
       node-inset: 6pt,
       node-shape: rect,
-      node((0, 0), align(center)[USB-Netzteil\ 5 V / 2 A], name: <d-psu>),
+      node((0, 0), align(center)[USB-Netzteil Pumpe\ 5 V / 2 A], name: <d-psu>),
       node((2, 0), align(center)[MOSFET-Board\ P2003BDG], name: <d-mos>),
       node((4, 0), align(center)[Pumpe\ 5 V], name: <d-pump>),
       node((4, 1), align(center)[1N4007\ Freilaufdiode], name: <d-diode>),
-      node((2, 1), align(center)[5-V-Schiene\ Steckbrett], name: <d-rail>),
-      node((3, 1), [ESP32], name: <d-esp>),
-      node((1.5, 2), [1000 µF], name: <d-cap>),
-      node((2.5, 2), [TDS-Modul], name: <d-tds>),
+      node((1, 1), [1000 µF], name: <d-cap>),
+      node((0, 2), align(center)[USB-Netzteil\ ESP32], name: <d-epsu>),
+      node((2, 2), [ESP32], name: <d-esp>),
+      node((4, 2), align(center)[TDS-Modul\ 5 V], name: <d-tds>),
       node((0, 3), align(center)[Netzteil\ Growlight], name: <d-lpsu>),
       node((4, 3), align(center)[Growlight\ (Timer 12 h)], name: <d-light>),
       edge(<d-psu>, <d-mos>, "-|>", [VIN]),
       edge(<d-mos>, <d-pump>, "-|>", [VOUT]),
       edge(<d-pump>, <d-diode>, "-", [parallel], label-side: left),
-      edge(<d-mos>, <d-rail>, "-|>", [VIN], label-side: right),
-      edge(<d-rail>, <d-cap>, "-"),
-      edge(<d-rail>, <d-tds>, "-|>"),
-      edge(<d-rail>, <d-esp>, "-|>", [5V], label-side: right),
-      edge(<d-esp>, <d-mos>, "--|>", [GPIO 25 → TRIG], label-side: right),
+      edge(<d-cap>, <d-mos>, "-", [an VIN], label-side: right),
+      edge(<d-epsu>, <d-esp>, "-|>", [USB]),
+      edge(<d-esp>, <d-tds>, "-|>", [5-V-Pin]),
+      edge(<d-esp>, <d-mos>, "--|>", [GPIO 25 → TRIG,\ gemeinsame Masse], label-side: right),
       edge(<d-lpsu>, <d-light>, "-|>", [keine Verbindung zum ESP32]),
     )
   },
-  caption: [Leistungspfad und Versorgung (vereinfacht, gemeinsame Masse nicht dargestellt)],
+  caption: [Leistungspfad und Versorgung (vereinfacht)],
 ) <fig-leistungspfad>
 
-Das USB-Netzteil speist über einen USB-A-Pigtail mit Stecker den Eingang (VIN)
-des #gls("mosfet")-Boards. Am Ausgang (VOUT) sitzt ein USB-A-Pigtail mit
-Buchse, in die die Pumpe mit ihrem originalen Stecker eingesteckt wird. Von VIN
-wird zusätzlich die 5-V-Schiene des Steckbretts versorgt, an der das TDS-Modul
-und, im Betrieb ohne angeschlossenen Rechner, der ESP32 über seinen 5-V-Pin
-hängen. Der ESP32 steuert das Board über GPIO 25 am Eingang TRIG an. Über
-diesen Pin fließt nur der Gate-Steuerstrom im Mikroampere-Bereich; den
-Pumpenstrom führt der ESP32 zu keinem Zeitpunkt.
+Das USB-Netzteil der Pumpe speist über einen USB-A-Pigtail mit Stecker den
+Eingang (VIN) des #gls("mosfet")-Boards. Am Ausgang (VOUT) sitzt ein
+USB-A-Pigtail mit Buchse, in die die Pumpe mit ihrem originalen Stecker
+eingesteckt wird. Der ESP32 hat ein eigenes USB-Netzteil und versorgt über
+seinen 5-V-Pin das TDS-Modul. Dadurch belastet der Anlaufstrom der Pumpe nicht
+die Versorgung des Steuerkreises. Der ESP32 steuert das Board über GPIO 25 am
+Eingang TRIG an. Über diesen Pin fließt nur der Gate-Steuerstrom im
+Mikroampere-Bereich; den Pumpenstrom führt der ESP32 zu keinem Zeitpunkt.
 
 Der P2003BDG ist ein Logic-Level-MOSFET mit einer Schwellspannung von 1–3 V und
 schaltet bei 3,3 V Gate-Spannung vollständig durch. Darin unterscheidet er sich
@@ -114,17 +113,17 @@ Drei Schutzmaßnahmen ergänzen den Leistungspfad (@tab-schutz).
       [1N4007 über der Pumpe\ (Kathodenring an +)],
       [Freilaufdiode. Die Motorspule erzeugt beim Abschalten eine Gegenspannung weit über der 25-V-Grenze des MOSFET; die Diode schließt sie kurz.],
       [1000 µF an VIN],
-      [Puffert den Anlaufstrom der Pumpe, damit die 5-V-Schiene nicht einbricht und den ESP32 zurücksetzt.],
+      [Puffert den Anlaufstrom der Pumpe, damit die Spannung des Pumpen-Netzteils nicht einbricht.],
       [Gemeinsame Masse],
-      [Das Board schaltet low-side und benötigt denselben Bezugspunkt wie der ESP32.],
+      [Das Board schaltet low-side und benötigt denselben Bezugspunkt wie der ESP32, obwohl beide getrennte Netzteile haben.],
     ),
   ),
   caption: [Schutzmaßnahmen im Leistungspfad],
 ) <tab-schutz>
 
-@tab-strombilanz zeigt die Strombilanz am USB-Netzteil. Selbst im ungünstigsten
-Fall, wenn der Anlaufstrom der Pumpe zum vollen Betriebsstrom aller Verbraucher
-hinzukommt, bleibt die Spitze mit ca. 1,8 A unter den 2 A des Netzteils. Das
+@tab-strombilanz zeigt die Strombilanz der beiden USB-Netzteile. Am Netzteil
+der Pumpe bleibt selbst die Spitze beim Anlauf mit ca. 1,5 A unter den 2 A des
+Netzteils. Der Steuerkreis nimmt rechnerisch höchstens ca. 0,3 A auf. Das
 Growlight (2 A) läuft über sein eigenes Netzteil und geht nicht in die Bilanz
 ein.
 
@@ -133,18 +132,20 @@ ein.
     table(
       columns: (1fr, auto),
       table.header([Verbraucher], [Stromaufnahme]),
+      table.cell(colspan: 2, align: left, emph[USB-Netzteil Pumpe (5 V / 2 A)]),
       [Pumpe, Betrieb], [ca. 0,5 A],
       [Pumpe, Anlauf (kurzzeitig)], [+1,0 A Spitze],
+      [*Spitze beim Pumpenanlauf*], [*max. ca. 1,5 A*],
+      table.hline(stroke: 0.7pt),
+      table.cell(colspan: 2, align: left, emph[USB-Netzteil ESP32]),
       [ESP32], [0,08–0,25 A],
       [TDS-Modul], [0,01 A],
       [DS18B20 und Füllstandssensor], [< 0,01 A],
       [3 Status-LEDs], [0,02 A],
-      table.hline(stroke: 0.7pt),
-      [*Summe Dauerbetrieb (rechnerisch)*], [*0,61–0,79 A*],
-      [*Spitze beim Pumpenanlauf*], [*max. ca. 1,8 A*],
+      [*Summe (rechnerisch)*], [*ca. 0,11–0,29 A*],
     ),
   ),
-  caption: [Strombilanz am USB-Netzteil],
+  caption: [Strombilanz der USB-Netzteile],
 ) <tab-strombilanz>
 
 #figure(

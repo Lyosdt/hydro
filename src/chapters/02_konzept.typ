@@ -197,7 +197,7 @@ Die Umsetzung weicht in mehreren Punkten vom Projektauftrag ab
         mechanische Kontakte.],
       [Beleuchtung über Relaismodul], [Growlight mit eigenem Timer],
       [Das Growlight nimmt 2 A auf und hätte zusammen mit der Pumpe das
-        USB-Netzteil überlastet (@tab-strombilanz). Der feste Lichtzyklus
+        USB-Netzteil der Pumpe überlastet (@tab-strombilanz). Der feste Lichtzyklus
         benötigt keine Sensordaten; der Timer ist bereits integriert.],
       [Schwimmerschalter], [Kapazitiver Sensor XKC-Y25-NPN],
       [Keine beweglichen Teile und kein Kontakt mit der Nährlösung. Der Sensor
