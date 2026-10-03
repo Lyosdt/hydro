@@ -17,13 +17,10 @@ Zielgruppe (K6) ist umgesetzt, aber nicht geprüft.
 
 == Limitationen
 
-- *Relative EC-Skala.* Das Handheld-Messgerät wurde nicht gegen eine
-  Referenzlösung geprüft; ein systematischer Fehler würde unerkannt übernommen.
-  Die Kennlinie verläuft durch genau drei Punkte, eine unabhängige
-  Kontrollmessung fehlt. Belastbar ist sie nur zwischen ca. 650 und
-  2300 µS/cm.
-- *Kein pH-Wert.* Der pH-Wert wurde weder automatisch noch manuell erfasst. Ein
-  Teil der Nährlösungsqualität bleibt damit unbeobachtet.
+- *Relative EC-Skala.* Ohne Referenzlösung und Kontrollpunkt würde ein
+  systematischer Fehler des Handheld-Geräts unerkannt übernommen; belastbar ist
+  die Kennlinie nur zwischen ca. 650 und 2300 µS/cm.
+- *Kein pH-Wert* (@kap-abgrenzung).
 - *Nachträgliche Dokumentation.* Es gab keine kontinuierliche
   Datenaufzeichnung und keinen protokollierten Langzeitbetrieb. Da der Aufbau
   nicht mehr besteht, sind die Tests nicht wiederholbar.

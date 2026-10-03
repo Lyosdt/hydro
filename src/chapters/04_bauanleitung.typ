@@ -210,15 +210,9 @@ Temperatursensor. #gls("wlan") wird nicht genutzt; das System arbeitet
 vollständig lokal. Die Wahl von ADC1 für den TDS-Sensor hält eine spätere
 WLAN-Erweiterung dennoch offen.
 
-Während Pumpe und Status-LEDs in jedem Schleifendurchlauf gesetzt werden,
-erfolgt die Messung alle 30 s. Für einen Messwert bildet die Firmware den
-Median aus 30 Einzelwerten, da der TDS-Sensor mit einer Wechselspannung
-angeregt wird und Einzelwerte Ausreißer enthalten. Ein nicht antwortender
-Temperatursensor wird als ungültiger Wert behandelt und löst den Alarm aus,
-statt den Fehlwert der Bibliothek (−127 °C) in die Kompensation einfließen zu
-lassen. Die Alarmbedingungen werden ebenfalls im 30-s-Takt ausgewertet; die
-Alarm-LED reagiert daher mit bis zu 30 s Verzögerung, die Pumpensperre dagegen
-sofort.
+Gemessen wird alle 30 s, jeweils als Median aus 30 Einzelwerten gegen die
+Ausreißer der Wechselspannungsanregung. Die Alarm-LED reagiert daher mit bis zu
+30 s Verzögerung, die Pumpensperre dagegen in jedem Schleifendurchlauf sofort.
 
 Für die Kalibrierung besitzt die Firmware einen eigenen Modus
 (`CALIBRATION_MODE`). Darin bleibt die Pumpe gesperrt, und Display und serielle

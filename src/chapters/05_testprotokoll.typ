@@ -19,10 +19,6 @@ Tests weder wiederholt noch um Messreihen ergänzt werden. Die Beobachtungen sin
 deshalb qualitativ wiedergegeben; Zahlenwerte stehen nur dort, wo sie während
 der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
 
-Jeder Testfall ist in einem einheitlichen Block dokumentiert: Zeitraum,
-geprüftes Kriterium, Vorgehen, Beobachtung und Bewertung. Die Bewertung lautet
-_erfüllt_, _teilweise erfüllt_ oder _nicht geprüft_.
-
 == Testfälle
 
 #testfall(
@@ -51,11 +47,9 @@ _erfüllt_, _teilweise erfüllt_ oder _nicht geprüft_.
     Lösungen unterschiedlicher Leitfähigkeit gemessen; die Spannung wurde mit
     der Temperatur des DS18B20 auf 25 °C kompensiert (@kap-kalibrierung).],
   beobachtung: [Die kompensierte Spannung stieg mit der Leitfähigkeit des
-    Handheld-Geräts an (@tab-kalibrierung). Eine Gerade durch die äußeren Punkte
-    verfehlte den mittleren um +7,8 %; der Zusammenhang ist also nicht linear,
-    weshalb eine quadratische Kennlinie verwendet wird. Diese verläuft per
-    Konstruktion exakt durch alle drei Punkte und ist damit kein unabhängiger
-    Nachweis der Genauigkeit. Eine Kontrollmessung an einem vierten Punkt fand
+    Handheld-Geräts an, nicht linear (@tab-kalibrierung). Die quadratische
+    Kennlinie verläuft per Konstruktion exakt durch alle drei Punkte und ist
+    damit kein unabhängiger Nachweis der Genauigkeit. Eine Kontrollmessung an einem vierten Punkt fand
     nicht statt; das Handheld-Gerät selbst wurde nicht gegen eine
     Referenzlösung geprüft.],
   bewertung: "teilweise erfüllt",
@@ -104,26 +98,20 @@ Ergebnis zu.
 #figure(
   table_style_1(
     table(
-      columns: (auto, auto, auto, 1fr),
+      columns: (1fr, auto, auto),
       align: left + horizon,
-      table.header([Kriterium], [Test], [Bewertung], [Anmerkung]),
+      table.header([Kriterium], [Test], [Bewertung]),
       [K1 Wassertemperatur], [T1], bewertung_badge("erfüllt"),
-      [Messwert und Alarm reagieren; kein Referenzthermometer],
       [K2 Leitfähigkeit], [T2], bewertung_badge("teilweise erfüllt"),
-      [Kalibrierung durchgeführt; keine unabhängige Kontrollmessung,
-        Referenzgerät nicht geprüft],
       [K3 Füllstand], [T3], bewertung_badge("erfüllt"),
-      [Erkennung und Meldung über Alarm-LED],
       [K4 Trockenlaufschutz], [T4], bewertung_badge("erfüllt"),
-      [Pumpe läuft ohne erkannte Flüssigkeit nicht],
       [K5 Pumpenbetrieb], [T4], bewertung_badge("erfüllt"),
-      [Takt eingehalten, kein Neustart des ESP32 (mit Kondensator)],
       [K6 Ablesbarkeit], [—], bewertung_badge("nicht geprüft"),
-      [Anzeige umgesetzt (@kap-software); keine Erprobung mit Schülern],
     ),
   ),
   caption: [Soll-Ist-Abgleich der Zielkriterien],
 ) <tab-soll-ist>
 
-Damit ist der Kern der technischen Problemstellung nachgewiesen (K1, K3–K5);
-die Einschränkungen bei K2 und K6 greift @kap-fazit auf.
+Damit ist der Kern der technischen Problemstellung nachgewiesen (K1, K3–K5).
+K6 wurde nicht geprüft, da keine Erprobung mit Schülern stattfand; die
+Einschränkungen bei K2 und K6 greift @kap-fazit auf.

@@ -21,9 +21,9 @@ noch welche offen sind.
 
 ## Zu entscheiden
 
-- [ ] **Umfang:** Textteil nach Kürzung (A + B + C) 16 Seiten, die letzte nur
-  zu ca. 40 % gefüllt; Ziel 12–15. Das Foto des Gesamtaufbaus ersetzt nur den
-  Platzhalter und sollte nicht höher werden.
+- [ ] **Umfang:** Textteil 15 Seiten (Maximum), Seite 15 zu ca. drei Vierteln
+  gefüllt — kaum Puffer. Das Foto des Gesamtaufbaus darf nicht höher werden
+  als der Platzhalter (5 cm); nach jeder Ergänzung Seitenzahl prüfen.
 
 ## Vor der Abgabe
 

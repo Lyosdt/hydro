@@ -66,10 +66,6 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
 
 #todo("Mechanik und Pflanzen: Anzahl der Schraubschellen; Bezugsquelle und Preis aller Positionen der beiden letzten Gruppen (\"vorhanden\" geht auch). Außerdem: Welches Nährstoffkonzentrat wurde verwendet (Produkt, Quelle, Preis)?")
 
-Zwei Positionen gehören nicht zum Steuerkreis des ESP32. Das Growlight wird
-über ein eigenes Netzteil versorgt und durch seinen internen Timer geschaltet;
-es ist elektrisch vollständig vom übrigen Aufbau getrennt. Das
-Handheld-Messgerät diente als Referenz für die Kalibrierung der
-Leitfähigkeitsmessung (@kap-kalibrierung) und ist kein Bestandteil des
-Demonstrators. pH-Sonde und Dosierpumpe sind bewusst nicht enthalten
+Das Handheld-Messgerät diente nur als Referenz für die Kalibrierung und ist
+nicht aufgeführt; pH-Sonde und Dosierpumpe sind bewusst nicht enthalten
 (@kap-abgrenzung).

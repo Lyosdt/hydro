@@ -21,6 +21,10 @@
 	appendix_content: include "chapters/99_anhang.typ",
 )
 
+// Lange Tabellen dürfen umbrechen (Kopfzeile wird wiederholt), statt als
+// Ganzes auf die nächste Seite zu springen
+#show figure.where(kind: table): set block(breakable: true)
+
 #include "chapters/01_problemstellung.typ"
 #include "chapters/02_konzept.typ"
 #include "chapters/03_stueckliste.typ"
