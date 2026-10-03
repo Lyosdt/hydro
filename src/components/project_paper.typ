@@ -64,8 +64,6 @@
   set enum(spacing: list_spacing, indent: list_indent)
   // Tables and figures: caption above tables, below images (common convention)
   show figure.where(kind: table): set figure.caption(position: top)
-  // Long tables (e.g. bill of materials) may continue on the next page
-  show figure.where(kind: table): set block(breakable: true)
 
   // Cover (no header on the cover page)
   {

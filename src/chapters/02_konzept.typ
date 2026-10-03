@@ -16,7 +16,7 @@
 == Sensorik und Aktorik
 #todo("Sensorik und Aktorik")
 
-== Statuslogik und Verriegelung
+== Statuslogik und Verriegelung <kap-statuslogik>
 // Heartbeat-Blinken statt Dauerlicht; Pumpenverriegelung `wantPump && waterPresent()`.
 #todo("Statuslogik und Verriegelung")
 

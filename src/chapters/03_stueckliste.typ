@@ -16,6 +16,8 @@ Bezugsquelle „vorhanden“ und einem Preis von 0 € geführt, sodass die Summ
 die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
 100 € gegenübergestellt, das der Erstattungsgrenze der Hochschule entspricht.
 
+// The bill of materials is long enough to continue on the next page
+#show figure: set block(breakable: true)
 #figure(
   stueckliste(
     (
