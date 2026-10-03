@@ -1,47 +1,44 @@
 #import "../const.typ": nordakademie_blue
 
-#let linebreak_n(n) = {
-	let i = 0;
-	while i < n {
-		linebreak()
-		i = i + 1;
-	}
-}
-
 #let blue_cell(content) = table.cell(
 	fill: nordakademie_blue,
+	inset: 8pt,
 	text(weight: "bold", fill: white, content),
 )
 
-// Cover Component
-#let cover(language, nr, matnr, topic, degree) = {
-	let texts
-	if language == "en" {
-		texts = (
-			header: "Theory/Practice Transfer Paper",
-			matnr: "Matriculation number:",
-			topic: "Accepted topic:",
-			programme: "Bachelor's programme, centuria:"
-		)
-	} else if language == "de" {
-		texts = (
-			header: "Transferleistung Theorie/Praxis",
-			matnr: "Matrikelnummer:",
-			topic: "Freigegebenes Thema:",
-			programme: "Studiengang, Zenturie:"
-		)
-	} else {
-		return "Language must be English (\"en\") or German (\"de\")"
-	}
-	set text(font: "Liberation Sans", fallback: true)
+#let value_cell(content) = table.cell(inset: 8pt, content)
 
-	text(weight: "bold", fill: nordakademie_blue, size: 15pt)[#texts.header #nr]
-	linebreak_n(2)
+// Cover Component
+// authors: array of (name: "...", matnr: "...")
+#let cover(texts, title, subtitle, module, authors, programme, lecturer, date) = {
+	set text(font: "Liberation Sans", fallback: true)
+	set par(justify: false)
+
+	grid(
+		columns: (1fr, auto),
+		align: horizon,
+		text(weight: "bold", fill: nordakademie_blue, size: 15pt, texts.doc_type),
+		image("../res/nordakademie_logo.png", height: 1.4cm),
+	)
+
+	v(3cm)
+	text(weight: "bold", size: 22pt, fill: nordakademie_blue, title)
+	if subtitle != none {
+		v(0.3cm)
+		text(size: 14pt, subtitle)
+	}
+	v(2cm)
+
 	table(
 		columns: (1fr, 2fr),
-		blue_cell[#texts.matnr #linebreak_n(2)], matnr,
-		blue_cell[#texts.topic #linebreak_n(5)], topic,
-		blue_cell[#texts.programme], degree
+		stroke: 0.5pt + nordakademie_blue,
+		blue_cell(texts.cover_module), value_cell(module),
+		blue_cell(texts.cover_authors), value_cell(
+			authors.map(a => [#a.name (#a.matnr)]).join(linebreak())
+		),
+		blue_cell(texts.cover_programme), value_cell(programme),
+		blue_cell(texts.cover_lecturer), value_cell(lecturer),
+		blue_cell(texts.cover_date), value_cell(date),
 	)
 
 	set text(font: "libertinus serif")

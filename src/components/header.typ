@@ -1,21 +1,18 @@
-// Header component
-#let header(language) = {
+#import "../const.typ": nordakademie_blue
+
+// Header component: document type and short title left, logo right
+#let header(doc_type, short_title) = {
   grid(
-    columns: (1fr, 1fr),
-    align: top,
+    columns: (1fr, auto),
+    align: horizon,
     stroke: (bottom: .5pt + black),
     inset: (bottom: 5pt),
-    image(
-      if language == "en" {
-        "../res/header_en.png"
-      } else if language == "de" {
-        "../res/header_de.png"
-      },
-      width: 70%
-    ),
-    grid.cell(
-      align: right,
-      image("../res/nordakademie_logo.png", width: 70%)
-    )
+    {
+      set text(size: 9pt, fill: nordakademie_blue)
+      text(weight: "bold", upper(doc_type))
+      linebreak()
+      short_title
+    },
+    image("../res/nordakademie_logo.png", height: 1.1cm),
   )
 }

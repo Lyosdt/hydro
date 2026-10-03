@@ -1,16 +1,27 @@
-#import "components/transfer_paper.typ": transfer_paper
+#import "components/project_paper.typ": project_paper
 #import "const.typ": language
+#import "components/formatting.typ": todo
 
-#show: transfer_paper.with(
+#show: project_paper.with(
 	language: language,
-  "1",
-	"12345",
-	"Ein wundervoller und deskriptiver, aber nicht zu langer Titel, aber immerhin füllt er zwei Zeilen",
-	"Angewandte Informatik, A22b",
-	appendix_content: include "chapters/99_appendix.typ",
+	title: "NFT-Hydroponik mit ESP32",
+	subtitle: "Automatisierter Basilikum-Demonstrator für den Schuleinsatz",
+	module: todo("Modulbezeichnung"),
+	// Ein Eintrag je Gruppenmitglied
+	authors: (
+		(name: "Lyonel Stadthoewer", matnr: todo("Matrikelnummer")),
+	),
+	programme: todo("Studiengang, Zenturie"),
+	lecturer: todo("Dozent"),
+	date: todo("Abgabedatum"),
+	// Vor der Abgabe auf false setzen: Kompilierung schlägt fehl, solange TODOs offen sind
+	entwurf: true,
+	appendix_content: include "chapters/99_anhang.typ",
 )
 
-// --- Include content here ---
-#include "chapters/01_chapter.typ"
-#include "chapters/02_chapter.typ"
-#include "chapters/03_chapter.typ"
+#include "chapters/01_problemstellung.typ"
+#include "chapters/02_konzept.typ"
+#include "chapters/03_stueckliste.typ"
+#include "chapters/04_bauanleitung.typ"
+#include "chapters/05_testprotokoll.typ"
+#include "chapters/06_fazit.typ"
