@@ -16,9 +16,9 @@ Hinblick auf den Einsatz als transportabler, automatisierter Demonstrator.
 #figure(
   table_style_1(
     table(
-      columns: (auto, 1fr, 1fr),
+      columns: (2.4cm, 1fr, 1.25fr),
       align: left,
-      table.header([Verfahren], [Prinzip], [Bewertung für den Demonstrator]),
+      table.header([Verfahren], [Prinzip], [Bewertung]),
       [#gls("nft")],
       [Eine Pumpe fördert die Lösung in eine leicht geneigte Rinne; sie fließt als
         dünner Film an den Wurzeln entlang und zurück ins Reservoir.],
@@ -111,34 +111,29 @@ elektrische Umsetzung beschreibt @kap-schaltplan.
       align: left,
       table.header([Funktion], [Bauteil], [Prinzip und Begründung]),
       [Temperatur], [DS18B20],
-      [Digitaler, werkseitig kalibrierter Sensor in wasserdichter Hülse,
-        OneWire-Bus. Liefert zugleich die Temperatur für die Kompensation der
-        Leitfähigkeit.],
-      [Leitfähigkeit], [TDS-Sensor\ (Gravity-Bauform)],
-      [Zwei Elektroden in der Lösung, angeregt mit Wechselspannung, um
-        Elektrolyse an den Elektroden zu vermeiden. Ausgang ist eine zur
-        Leitfähigkeit steigende Spannung von 0–2,3 V.],
+      [Digital, werkseitig kalibriert, OneWire; liefert auch die Temperatur
+        für die EC-Kompensation.],
+      [Leitfähigkeit], [TDS-Sensor],
+      [Zwei Elektroden mit Wechselspannung (keine Elektrolyse); Ausgang
+        0–2,3 V.],
       [Füllstand], [XKC-Y25-NPN],
-      [Kapazitiv und berührungslos durch die Behälterwand. Keine beweglichen
-        Teile und kein Kontakt mit der Nährlösung.],
-      [Pumpe schalten], [MOSFET-Board\ P2003BDG],
-      [Logic-Level-MOSFET, schaltet mit 3,3 V vom GPIO vollständig durch;
-        der Pumpenstrom fließt nicht über den ESP32.],
+      [Kapazitiv durch die Behälterwand, ohne Kontakt zur Lösung.],
+      [Pumpe], [MOSFET-Board],
+      [Logic-Level, schaltet mit 3,3 V vom GPIO voll durch.],
       [Anzeige], [OLED 128 × 32],
-      [Temperatur und Leitfähigkeit mit Bewertungssymbol, #gls("i2c")-Bus.],
-      [Status], [3 Status-LEDs],
-      [Betrieb, Pumpe und Alarm auf einen Blick, auch aus der Entfernung.],
+      [Messwerte mit Bewertungssymbol, #gls("i2c")-Bus.],
+      [Status], [3 LEDs],
+      [Betrieb, Pumpe und Alarm auf einen Blick.],
     ),
   ),
   caption: [Sensoren und Aktoren],
 ) <tab-komponenten>
 
-Der Name des TDS-Sensors bezieht sich auf die Größe #gls("tds"), die Menge
-gelöster Feststoffe in #gls("ppm"). Sie wird nicht direkt gemessen, sondern aus
-der Leitfähigkeit mit einem Umrechnungsfaktor berechnet, der je nach Gerät
-verschieden ist. Die Firmware verwendet den Faktor 0,5 („ppm \@ 500“), passend
-zur Skala des Handheld-Messgeräts. Leitgröße für Anzeige und Bewertung ist
-jedoch die Leitfähigkeit, da sie unabhängig von einem Umrechnungsfaktor ist.
+Der TDS-Sensor ist nach der Größe #gls("tds") benannt, der Menge gelöster
+Feststoffe in #gls("ppm"). Sie wird aus der Leitfähigkeit mit einem
+geräteabhängigen Faktor berechnet; die Firmware nutzt passend zum
+Handheld-Gerät den Faktor 0,5 („ppm \@ 500“). Leitgröße ist deshalb die
+Leitfähigkeit.
 
 == Statuslogik und Verriegelung <kap-statuslogik>
 

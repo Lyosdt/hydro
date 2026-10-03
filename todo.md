@@ -21,10 +21,9 @@ noch welche offen sind.
 
 ## Zu entscheiden
 
-- [ ] **Umfang:** Textteil aktuell ca. 20 Seiten, Ziel 12–15. Größter Posten
-  ist Kapitel 4 (ca. 7 statt 3,5 Seiten). Kürzen?
-- [ ] **Platzhalter Verdrahtungsfoto** (`fig-verdrahtung`) streichen, da nur
-  ein Foto existiert und der Leistungspfad als Diagramm vorliegt?
+- [ ] **Umfang:** Textteil nach Kürzung (A + B + C) 16 Seiten, die letzte nur
+  zu ca. 40 % gefüllt; Ziel 12–15. Das Foto des Gesamtaufbaus ersetzt nur den
+  Platzhalter und sollte nicht höher werden.
 
 ## Vor der Abgabe
 

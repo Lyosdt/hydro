@@ -16,6 +16,8 @@
 	date: todo("Abgabedatum"),
 	// Vor der Abgabe auf false setzen: Kompilierung schlägt fehl, solange TODOs offen sind
 	entwurf: true,
+	// Kapitel nicht auf neuer Seite beginnen (Seitenumfang)
+	chapter_pagebreak: false,
 	appendix_content: include "chapters/99_anhang.typ",
 )
 

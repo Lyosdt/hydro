@@ -6,17 +6,14 @@
 
 == Ergebnis
 
-Mit dem Demonstrator wurde eine NFT-Anlage für vier Basilikumpflanzen
-aufgebaut, deren Nährlösungskreislauf im Betrieb funktionierte. Von den sechs
-Zielkriterien aus @kap-kriterien sind vier erfüllt (@tab-soll-ist): Die Pumpe
-läuft selbstständig im vorgesehenen Takt (K5), die Verriegelung verhindert
-einen Trockenlauf (K4), und niedriger Füllstand sowie Temperaturen außerhalb
-des Zielbereichs werden über die Alarm-LED gemeldet (K1, K3). Damit ist die
-technische Problemstellung gelöst: Der Zustand der Nährlösung wird ohne
-tägliche manuelle Messung überwacht, und Störfälle werden sichtbar. Die
-Leitfähigkeitsmessung (K2) ist kalibriert, ihre Genauigkeit aber nur relativ
-zum Referenzgerät belegt. Die Ablesbarkeit für die Zielgruppe (K6) ist
-konstruktiv umgesetzt, wurde aber nicht geprüft.
+Der Demonstrator, eine NFT-Anlage für vier Basilikumpflanzen mit
+funktionierendem Kreislauf, erfüllt vier der sechs Zielkriterien
+(@tab-soll-ist): Die Pumpe läuft selbstständig im vorgesehenen Takt (K5), die
+Verriegelung verhindert einen Trockenlauf (K4), und niedriger Füllstand sowie
+Temperaturen außerhalb des Zielbereichs werden gemeldet (K1, K3). Damit ist die
+technische Problemstellung gelöst. Die Leitfähigkeitsmessung (K2) ist
+kalibriert, aber nur relativ zum Referenzgerät belegt; die Ablesbarkeit für die
+Zielgruppe (K6) ist umgesetzt, aber nicht geprüft.
 
 == Limitationen
 
@@ -43,12 +40,11 @@ konstruktiv umgesetzt, wurde aber nicht geprüft.
 
 == Ausblick
 
-Die nächste Ausbaustufe sollte zuerst die Messkette absichern, bevor neue
-Funktionen hinzukommen. Mit einer Referenzlösung (1413 µS/cm) lassen sich das
-Handheld-Gerät und die Kennlinie an einem unabhängigen Punkt prüfen. Darauf
-aufbauend bietet sich eine Datenaufzeichnung per WLAN an; die Wahl von ADC1 für
-den TDS-Sensor hält diese Erweiterung offen. Ein aufgezeichneter Verlauf würde
-im Unterricht zeigen, wie die Leitfähigkeit mit dem Wasserverbrauch der Pflanzen
-steigt. Eine pH-Messung mit hochwertiger Sonde und erst danach eine automatische
-Dosierung würden den Regelkreis schließen. Parallel sollte der Demonstrator mit
-einer Schulklasse erprobt werden, um K6 zu prüfen.
+Die nächste Ausbaustufe sollte zuerst die Messkette absichern: Mit einer
+Referenzlösung (1413 µS/cm) lassen sich Handheld-Gerät und Kennlinie an einem
+unabhängigen Punkt prüfen. Darauf aufbauend bietet sich eine Datenaufzeichnung
+per WLAN an, die im Unterricht den Anstieg der Leitfähigkeit mit dem
+Wasserverbrauch der Pflanzen zeigen würde; die Wahl von ADC1 hält diese
+Erweiterung offen. Eine pH-Messung mit hochwertiger Sonde und erst danach eine
+automatische Dosierung würden den Regelkreis schließen. Parallel sollte der
+Demonstrator mit einer Schulklasse erprobt werden (K6).

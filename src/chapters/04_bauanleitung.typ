@@ -121,80 +121,11 @@ Drei Schutzmaßnahmen ergänzen den Leistungspfad (@tab-schutz).
   caption: [Schutzmaßnahmen im Leistungspfad],
 ) <tab-schutz>
 
-@tab-strombilanz zeigt die Strombilanz der beiden USB-Netzteile. Am Netzteil
-der Pumpe bleibt selbst die Spitze beim Anlauf mit ca. 1,5 A unter den 2 A des
-Netzteils. Der Steuerkreis nimmt rechnerisch höchstens ca. 0,3 A auf. Das
-Growlight (2 A) läuft über sein eigenes Netzteil und geht nicht in die Bilanz
-ein.
-
-#figure(
-  table_style_1(
-    table(
-      columns: (1fr, auto),
-      table.header([Verbraucher], [Stromaufnahme]),
-      table.cell(colspan: 2, align: left, emph[USB-Netzteil Pumpe (5 V / 2 A)]),
-      [Pumpe, Betrieb], [ca. 0,5 A],
-      [Pumpe, Anlauf (kurzzeitig)], [+1,0 A Spitze],
-      [*Spitze beim Pumpenanlauf*], [*max. ca. 1,5 A*],
-      table.hline(stroke: 0.7pt),
-      table.cell(colspan: 2, align: left, emph[USB-Netzteil ESP32]),
-      [ESP32], [0,08–0,25 A],
-      [TDS-Modul], [0,01 A],
-      [DS18B20 und Füllstandssensor], [< 0,01 A],
-      [3 Status-LEDs], [0,02 A],
-      [*Summe (rechnerisch)*], [*ca. 0,11–0,29 A*],
-    ),
-  ),
-  caption: [Strombilanz der USB-Netzteile],
-) <tab-strombilanz>
-
-#figure(
-  bild_platzhalter("Foto der Verdrahtung (Steckbrett, MOSFET-Board, ESP32) oder Schaltplan aus Fritzing/KiCad"),
-  caption: [Verdrahtung von Steuer- und Leistungskreis],
-) <fig-verdrahtung>
-
-== Verdrahtung und GPIO-Belegung
-
-@tab-gpio zeigt die Pinbelegung des ESP32 DevKit (WROOM, 30 Pin).
-
-#figure(
-  table_style_1(
-    table(
-      columns: (auto, 1fr, auto),
-      align: left,
-      table.header([Pin], [Funktion], [Modus]),
-      [GPIO 4], [Füllstandssensor XKC-Y25-NPN], [`INPUT_PULLUP`, LOW = Wasser],
-      [GPIO 5], [DS18B20, OneWire], [4,7 kΩ Pull-up gegen 3V3],
-      [GPIO 34], [TDS-Sensor, analog], [ADC1, `ADC_11db`, nur Eingang],
-      [GPIO 25], [MOSFET-Board TRIG (Pumpe)], [`OUTPUT`],
-      [GPIO 18], [Status-LED grün — Heartbeat], [`OUTPUT`],
-      [GPIO 19], [Status-LED gelb — Pumpe läuft], [`OUTPUT`],
-      [GPIO 23], [Status-LED rot — Alarm], [`OUTPUT`],
-      [GPIO 21], [OLED SDA], [I²C],
-      [GPIO 22], [OLED SCL], [I²C],
-    ),
-  ),
-  caption: [GPIO-Belegung des ESP32],
-) <tab-gpio>
-
-Die Belegung folgt vier Randbedingungen des ESP32:
-
-- *TDS-Sensor auf ADC1.* Der Analogeingang muss auf ADC1 (GPIO 32–39) liegen.
-  ADC2 wird vom #gls("wlan")-Treiber belegt; `analogRead` liefert dort
-  unbrauchbare Werte, sobald WLAN aktiv ist. GPIO 34 ist ein reiner Eingang und
-  damit für diese Aufgabe geeignet. Der Sensorausgang (0–2,3 V) bleibt unter
-  der 3,3-V-Grenze des Eingangs; das Modul selbst benötigt zwingend 5 V.
-- *Alarm-LED auf GPIO 23.* GPIO 21 ist durch die SDA-Leitung des
-  #gls("i2c")-Busses belegt.
-- *Strapping-Pins frei.* GPIO 0, 2, 12 und 15 bleiben unbelegt, da eine Last
-  dort den Bootvorgang oder das Flashen blockieren kann. GPIO 5 ist ebenfalls
-  ein Strapping-Pin; der Pull-up des OneWire-Busses hält ihn beim Start auf
-  High.
-- *Füllstandssensor ohne Pegelwandler.* Der Sensor hat einen
-  Open-Collector-Ausgang, der bei erkannter Flüssigkeit nach Masse zieht. Den
-  High-Pegel stellt der interne Pull-up des ESP32 mit 3,3 V her.
-
-Jede Status-LED ist mit einem 220-Ω-Vorwiderstand beschaltet.
+Am Netzteil der Pumpe bleibt selbst die Spitze beim Anlauf mit ca. 1,5 A unter
+den 2 A des Netzteils; der Steuerkreis nimmt rechnerisch höchstens ca. 0,3 A
+auf. Die vollständige Strombilanz (@tab-strombilanz) sowie die GPIO-Belegung
+mit ihren Randbedingungen (@tab-gpio) stehen im Anhang. Jede Status-LED ist mit
+einem 220-Ω-Vorwiderstand beschaltet.
 
 == Inbetriebnahme
 
@@ -246,14 +177,8 @@ $ "EC" = "396,3" dot U_"komp"^2 + "701,1" dot U_"komp" + "14,0" quad [µ"S/cm"] 
 
 Die Funktion gilt zwischen ca. 650 und 2300 µS/cm; außerhalb dieser Spanne ist
 sie nicht belastbar. Der Zielbereich für Basilikum (1,0–1,6 mS/cm) liegt
-vollständig darin.
-
-Eine Referenzlösung (1413 µS/cm) stand nicht zur Verfügung, sodass das
-Handheld-Messgerät nicht gegen einen Normal geprüft werden konnte. Die
-EC-Skala des Systems ist damit relativ zum Handheld-Gerät; ein systematischer
-Fehler des Referenzgeräts würde unerkannt übernommen. Für die Demonstration des
-relativen Verlaufs, etwa des Anstiegs der Leitfähigkeit, während die Pflanzen
-Wasser aufnehmen, ist das ausreichend.
+vollständig darin. Da keine Referenzlösung zur Verfügung stand, ist die
+EC-Skala relativ zum Handheld-Gerät (@kap-fazit).
 
 == Software <kap-software>
 
@@ -263,16 +188,9 @@ daraus die temperaturkompensierte Leitfähigkeit, wertet die Alarmbedingungen au
 und setzt Pumpenausgang, Status-LEDs und Anzeige. Die Bedeutung der Status-LEDs
 ist in @kap-statuslogik beschrieben.
 
-Der Pumpenausgang wird in jedem Schleifendurchlauf aus der Bedingung
-`wantPump && waterPresent()` gesetzt. `wantPump` ist der Sollzustand aus dem
-Pumpenzeitplan, `waterPresent()` der aktuelle Zustand des Füllstandssensors.
-Der Zeitplan taktet die Pumpe mit 15 min Laufzeit und 45 min Pause. Der
-Intervallbetrieb senkt den Stromverbrauch der Pumpe und soll in den Pausen die
-Belüftung der Wurzeln verbessern (@kap-verfahren). Die
-Verriegelung greift in beiden Phasen: Auch innerhalb einer Laufphase wird die
-Pumpe abgeschaltet, sobald der Füllstand unter die Sensorhöhe fällt. Es gibt
-keinen Pfad, über den die Pumpe ohne aktive Füllstandsprüfung anläuft. Diese
-Verriegelung ist der zentrale Hardwareschutz des Systems.
+@lst-verriegelung zeigt den Kern der Verriegelung (@kap-statuslogik):
+`wantPump` ist der Sollzustand aus dem Pumpenzeitplan (15 min an, 45 min aus),
+`waterPresent()` der aktuelle Zustand des Füllstandssensors.
 
 #figure(
   ```cpp
@@ -285,7 +203,7 @@ Verriegelung ist der zentrale Hardwareschutz des Systems.
   caption: [Pumpenverriegelung in der Hauptschleife],
 ) <lst-verriegelung>
 
-@lst-verriegelung zeigt den Kern der Verriegelung. Neben dem Arduino-Kern
+Neben dem Arduino-Kern
 verwendet die Firmware die Bibliotheken `Adafruit_SSD1306` und `Adafruit_GFX`
 für das Display sowie `OneWire` und `DallasTemperature` für den
 Temperatursensor. #gls("wlan") wird nicht genutzt; das System arbeitet
@@ -302,12 +220,6 @@ lassen. Die Alarmbedingungen werden ebenfalls im 30-s-Takt ausgewertet; die
 Alarm-LED reagiert daher mit bis zu 30 s Verzögerung, die Pumpensperre dagegen
 sofort.
 
-Das Display zeigt in zwei Spalten die Temperatur in °C und die Leitfähigkeit in
-µS/cm. Neben jedem Wert steht ein Symbol: Pfeil nach oben (zu hoch), Pfeil nach
-unten (zu niedrig) oder Haken (im Zielbereich). Damit ist die Bewertung ohne
-Kenntnis der Zielbereiche ablesbar. Liefert der Temperatursensor keinen Wert,
-erscheint „\-\-.\-“.
-
 Für die Kalibrierung besitzt die Firmware einen eigenen Modus
 (`CALIBRATION_MODE`). Darin bleibt die Pumpe gesperrt, und Display und serielle
 Schnittstelle zeigen statt der Leitfähigkeit die gemessene Sensorspannung mit
@@ -317,29 +229,13 @@ Der vollständige Quellcode befindet sich im Anhang (@lst-firmware).
 
 == Pflanzenversorgung ohne Pumpenbetrieb <kap-ohne-betrieb>
 
-Bei Transport, Lagerung oder längeren Zeiten ohne Stromversorgung können die
-Pflanzen ohne Pumpe versorgt werden. Diese Betriebsart wurde im Projekt nicht
-erprobt und ist als Empfehlung für den Einsatz an Schulen zu verstehen. Dazu
-werden die Netztöpfe aus dem Rohr genommen und direkt in das Reservoir gesetzt,
-etwa in einen Deckel mit passenden Öffnungen. Die Wurzeln hängen dann
-unmittelbar in der Nährlösung. Das entspricht dem passiven Kratky-Verfahren,
-das als Hauptverfahren verworfen wurde (@kap-verfahren), sich aber als
-Überbrückung eignet, weil es weder Pumpe noch Steuerung benötigt.
-
-Dabei ist Folgendes zu beachten:
-
-- *Füllhöhe.* Die Wurzeln müssen in die Lösung eintauchen, Blähton und
-  Pflanzenansatz sollen oberhalb des Pegels bleiben, damit sie nicht dauerhaft
-  nass stehen.
-- *Luftraum.* Mit sinkendem Pegel entsteht zwischen Lösung und Netztopf ein
-  Luftraum, aus dem die oberen Wurzeln Sauerstoff aufnehmen. Das Reservoir wird
-  daher nicht ständig bis zum Rand nachgefüllt, sondern erst, wenn die Wurzeln
-  die Lösung nicht mehr erreichen.
-- *Licht.* Das Growlight hat ein eigenes Netzteil und einen eigenen Timer und
-  kann unabhängig vom ESP32 weiterlaufen.
-- *Keine Überwachung.* Ohne Steuerung entfallen Füllstands- und
-  Temperaturalarm. Füllstand und Zustand der Pflanzen sind manuell zu prüfen.
-
-Für die Wiederaufnahme des Betriebs werden die Netztöpfe in das Rohr
-zurückgesetzt und die Prüfschritte der Inbetriebnahme ab der Sensorprüfung
+Für Transport, Lagerung oder Zeiten ohne Stromversorgung wird empfohlen, die
+Netztöpfe aus dem Rohr zu nehmen und, etwa in einem Deckel mit passenden
+Öffnungen, direkt in das Reservoir zu setzen (passives Kratky-Verfahren,
+@kap-verfahren); im Projekt wurde das nicht erprobt. Die Wurzeln sollen in die
+Lösung eintauchen, Blähton und Pflanzenansatz oberhalb des Pegels bleiben. Der
+mit sinkendem Pegel entstehende Luftraum versorgt die oberen Wurzeln mit
+Sauerstoff, daher wird erst nachgefüllt, wenn die Wurzeln die Lösung nicht mehr
+erreichen. Das Growlight läuft unabhängig weiter, die Alarme entfallen jedoch.
+Bei Wiederaufnahme des Betriebs wird die Inbetriebnahme ab der Sensorprüfung
 wiederholt.

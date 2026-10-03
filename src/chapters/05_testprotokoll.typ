@@ -125,12 +125,5 @@ Ergebnis zu.
   caption: [Soll-Ist-Abgleich der Zielkriterien],
 ) <tab-soll-ist>
 
-Der Kern der technischen Problemstellung ist nachgewiesen: Die Pumpe läuft
-ohne manuellen Eingriff im vorgesehenen Takt, die Verriegelung verhindert
-einen Trockenlauf (K4, K5), und beide Störfälle, niedriger Füllstand und
-Temperatur außerhalb des Zielbereichs, werden sichtbar gemeldet (K1, K3). Die
-Leitfähigkeitsmessung (K2) ist kalibriert, aber nicht gegen eine unabhängige
-Referenz abgesichert. Die didaktische
-Zielsetzung (K6) ist konstruktiv umgesetzt, ihre Wirkung auf die Zielgruppe
-wurde nicht erprobt. Diese Einschränkungen werden in @kap-fazit als
-Limitationen aufgegriffen.
+Damit ist der Kern der technischen Problemstellung nachgewiesen (K1, K3–K5);
+die Einschränkungen bei K2 und K6 greift @kap-fazit auf.

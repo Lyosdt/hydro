@@ -71,8 +71,5 @@ Zwei Positionen gehören nicht zum Steuerkreis des ESP32. Das Growlight wird
 es ist elektrisch vollständig vom übrigen Aufbau getrennt. Das
 Handheld-Messgerät diente als Referenz für die Kalibrierung der
 Leitfähigkeitsmessung (@kap-kalibrierung) und ist kein Bestandteil des
-Demonstrators.
-
-Bewusst nicht enthalten sind eine pH-Sonde mit ausreichender Messqualität und
-eine Dosierpumpe; beide hätten den Budgetrahmen überschritten. Der pH-Wert wurde
-im Projekt nicht gemessen (@kap-abgrenzung).
+Demonstrators. pH-Sonde und Dosierpumpe sind bewusst nicht enthalten
+(@kap-abgrenzung).
