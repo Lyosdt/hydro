@@ -249,7 +249,8 @@ die Pflanzen Wasser aufnehmen) ist das ausreichend.
 - I²C-Adresse des OLED: 0x3C, so im Quellcode (geklärt).
 - `TODO:` tatsächliche Einzelpreise und Bezugsquellen für die Stückliste
 - Gruppe: Lyonel Stadthoewer, Antonio Steinhauer. Aufgabenverteilung je
-  Kapitel als Tabelle im Anhang (`tab-aufgaben`) — `TODO:` Namen eintragen.
+  Kapitel als Tabelle im Anhang (`tab-aufgaben`): Stadthoewer 1, 4, 6;
+  Steinhauer 2, 3, 5; Anhang gemeinsam (je ca. 7,5 Seiten).
 
 ### Zu klärende Widersprüche
 
