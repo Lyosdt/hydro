@@ -248,7 +248,8 @@ die Pflanzen Wasser aufnehmen) ist das ausreichend.
 
 - I²C-Adresse des OLED: 0x3C, so im Quellcode (geklärt).
 - `TODO:` tatsächliche Einzelpreise und Bezugsquellen für die Stückliste
-- `TODO:` Gruppengröße und Aufgabenverteilung
+- Gruppe: Lyonel Stadthoewer, Antonio Steinhauer. Aufgabenverteilung je
+  Kapitel als Tabelle im Anhang (`tab-aufgaben`) — `TODO:` Namen eintragen.
 
 ### Zu klärende Widersprüche
 
@@ -268,8 +269,8 @@ die Pflanzen Wasser aufnehmen) ist das ausreichend.
 - T3: rote LED hat reagiert. Wasserkreislauf hat funktioniert.
 - NFT bestätigt (Nutzer, nicht Ebbe-Flut).
 - Aufbau: vorne offene Holzbox (keine Holzplatte), Rohr leicht schräg an der
-  Rückwand, 4 Netztöpfe/4 Pflanzen. Unter der Box links Reservoir, rechts
-  Elektronikbox; Display nach vorne; Growlight oben angeschraubt, Timer rechts;
+  Rückwand, 4 Netztöpfe/4 Pflanzen. Unten in der Box (laut Foto
+  `src/res/HydroAufbau.jpg`) links Reservoir, rechts Elektronikbox; Display nach vorne; Growlight oben angeschraubt, Timer rechts;
   3 USB-Kabel hinten raus. Sensoren lose (für Vorführung beweglich).
   Pflanzen aus Stecklingen in Wasser bewurzelt. Holzbox aus Holzbrettern
   selbst gebaut. Schlauch führt durch ein passendes Loch in der Box.

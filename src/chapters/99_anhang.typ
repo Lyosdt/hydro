@@ -4,6 +4,28 @@
 #import "../components/tables.typ": table_style_1
 #import "../dependencies.typ": gls
 
+== Aufgabenverteilung
+
+@tab-aufgaben zeigt, wer welches Kapitel der Ausarbeitung verfasst hat.
+
+#figure(
+  table_style_1(
+    table(
+      columns: (1fr, auto),
+      align: left,
+      table.header([Kapitel], [Verfasst von]),
+      [1 Problemstellung und Zielsetzung], todo("Name"),
+      [2 Konzept], todo("Name"),
+      [3 Bauteilstückliste], todo("Name"),
+      [4 Bauanleitung], todo("Name"),
+      [5 Testprotokoll], todo("Name"),
+      [6 Fazit und Ausblick], todo("Name"),
+      [Anhang], todo("Name"),
+    ),
+  ),
+  caption: [Aufgabenverteilung nach Kapiteln],
+) <tab-aufgaben>
+
 == GPIO-Belegung
 
 @tab-gpio zeigt die Pinbelegung des ESP32 DevKit (WROOM, 30 Pin).

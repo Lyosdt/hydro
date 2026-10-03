@@ -49,7 +49,7 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
       "Mechanischer Aufbau",
       (bezeichnung: "Rahmen", typ: "Holzbox, vorne offen, aus Holzbrettern selbst gebaut", anzahl: 1, quelle: none, preis: none),
       (bezeichnung: "Anbaurohr", typ: "Rohr mit Öffnungen für die Netztöpfe", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Rohrbefestigung", typ: "Schraubschelle", anzahl: none, quelle: none, preis: none),
+      (bezeichnung: "Rohrbefestigung", typ: "Schraubschelle", anzahl: 2, quelle: none, preis: none),
       (bezeichnung: "Netztopf", typ: "Pflanzkorb für Hydrokultur", anzahl: 4, quelle: none, preis: none),
       (bezeichnung: "Reservoir", typ: "Plastikbox", anzahl: 1, quelle: none, preis: none),
       (bezeichnung: "Elektronikgehäuse", typ: "Plastikbox", anzahl: 1, quelle: none, preis: none),
@@ -64,7 +64,7 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
   caption: [Bauteilstückliste des Demonstrators],
 ) <tab-stueckliste>
 
-#todo("Mechanik und Pflanzen: Anzahl der Schraubschellen; Bezugsquelle und Preis aller Positionen der beiden letzten Gruppen (\"vorhanden\" geht auch). Außerdem: Welches Nährstoffkonzentrat wurde verwendet (Produkt, Quelle, Preis)?")
+#todo("Mechanik und Pflanzen: Bezugsquelle und Preis aller Positionen der beiden letzten Gruppen (\"vorhanden\" geht auch). Außerdem: Welches Nährstoffkonzentrat wurde verwendet (Produkt, Quelle, Preis)?")
 
 Das Handheld-Messgerät diente nur als Referenz für die Kalibrierung und ist
 nicht aufgeführt; pH-Sonde und Dosierpumpe sind bewusst nicht enthalten

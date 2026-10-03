@@ -24,7 +24,7 @@ Den Rahmen bildet eine vorne offene, aus Holzbrettern selbst gebaute Holzbox
   Rückwand der Box befestigt und trägt vier Netztöpfe.
 - *Beleuchtung.* Das Growlight ist oben in der Box angeschraubt, sein
   Zeitschalter sitzt rechts.
-- *Reservoir und Elektronik.* Unter der Holzbox stehen links das Reservoir und
+- *Reservoir und Elektronik.* Unten in der Holzbox stehen links das Reservoir und
   rechts das Elektronikgehäuse, beide aus je einer Kunststoffbox. Im Gehäuse
   sind ESP32, Steckbrett und MOSFET-Board untergebracht; das Display ist nach
   vorne ausgerichtet.
@@ -46,7 +46,7 @@ Stecklingen gezogen, die vollständig in Wasser bewurzelt wurden, bis die
 Wurzeln lang genug für den Einsatz in die Netztöpfe waren.
 
 #figure(
-  bild_platzhalter("Foto des Gesamtaufbaus (Rinne, Reservoir, Elektronik)"),
+  image("../res/HydroAufbau.jpg", height: 7cm),
   caption: [Gesamtaufbau des Demonstrators],
 ) <fig-aufbau>
 
