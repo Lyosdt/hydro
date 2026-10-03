@@ -13,7 +13,10 @@ noch welche offen sind.
     „vorhanden“ geht auch
   - Nährstoffkonzentrat: Produkt, Quelle, Preis
 - [ ] **Deckblatt:** Matrikelnummer Antonio Steinhauer (aktuell 00000)
-- [ ] **KI-Dokumentation** im Anhang (`99_anhang.typ`) ausfüllen
+- [ ] **KI-Dokumentation** im Anhang (`99_anhang.typ`): Einträge für die
+  Sitzung vom 03.10.2026 stehen. Falls Vorlagenanpassung oder die ersten
+  Entwürfe von Kapitel 3 und 4 (frühere Commits) ebenfalls mit KI entstanden
+  sind, je einen Eintrag mit Datum ergänzen.
 
 ## Zu entscheiden
 

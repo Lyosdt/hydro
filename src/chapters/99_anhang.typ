@@ -6,14 +6,15 @@
 
 == Aufgabenverteilung
 
-@tab-aufgaben zeigt, wer welches Kapitel der Ausarbeitung verfasst hat.
+@tab-aufgaben zeigt, wer für welches Kapitel der Ausarbeitung verantwortlich
+ist.
 
 #figure(
   table_style_1(
     table(
       columns: (1fr, auto),
       align: left,
-      table.header([Kapitel], [Verfasst von]),
+      table.header([Kapitel], [Verantwortlich]),
       [1 Problemstellung und Zielsetzung], [Lyonel Stadthoewer],
       [2 Konzept], [Antonio Steinhauer],
       [3 Bauteilstückliste], [Antonio Steinhauer],
@@ -100,6 +101,36 @@ Bilanz ein (@tab-strombilanz).
 ) <lst-firmware>
 
 // Pflicht laut NAK, falls KI genutzt wurde. Nur tatsächliche Anfragen eintragen.
+#let ki_software = "Claude Code (Claude Opus 5.5, Anthropic)"
 #ai_documentation(
-  entries: (),
+  entries: (
+    (
+      query: "Ausformulieren der Kapitel 1–6 aus eigenen Projektdaten (Messwerte, Testbeobachtungen, Firmware, Fotos, Entscheidungen)",
+      date: "2026-10-03",
+      reason: "Strukturierung und sprachliche Ausarbeitung bei knapper Frist",
+      quality: "Alle Inhalte gegen das eigene Projekt geprüft. Mehrere sachliche Fehler korrigiert (Stromversorgung des ESP32, Anordnung von Reservoir und Elektronik, Kabel- und Schlauchführung). Keine Messwerte von der KI übernommen, alle Zahlen stammen aus eigenen Messungen.",
+      software: ki_software,
+    ),
+    (
+      query: "Beschreibung der Firmware aus dem eigenen Quellcode",
+      date: "2026-10-03",
+      reason: "Zusammenfassung von Bibliotheken, Messablauf und Verriegelung",
+      quality: "Mit dem Quellcode abgeglichen",
+      software: ki_software,
+    ),
+    (
+      query: "Typst-Umsetzung von Tabellen und Diagrammen (Systemarchitektur, Leistungspfad)",
+      date: "2026-10-03",
+      reason: "Satz und Layout",
+      quality: "Schaltplan auf korrekte Verdrahtung geprüft und korrigiert",
+      software: ki_software,
+    ),
+    (
+      query: "Kürzung auf maximal 15 Seiten",
+      date: "2026-10-03",
+      reason: "Umfangsvorgabe",
+      quality: "Streichungen einzeln ausgewählt und freigegeben",
+      software: ki_software,
+    ),
+  ),
 )

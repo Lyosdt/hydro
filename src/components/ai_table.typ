@@ -57,7 +57,8 @@
       "ai_documentation: `date` must be in YYYY-MM-DD format, got `" + str(entry.date) + "`.",
     )
   }
-  " (" + parts.at(1) + "." + parts.at(2) + "." + parts.at(0) + ")"
+  // German order: DD.MM.YYYY
+  " (" + parts.at(2) + "." + parts.at(1) + "." + parts.at(0) + ")"
 }
 
 #let filled_row(entry) = {
