@@ -11,16 +11,39 @@
 == Mechanischer Aufbau
 
 Der mechanische Aufbau folgt dem #gls("nft")-Prinzip: Die Pflanzen sitzen in
-Netztöpfen in einer leicht geneigten Anbaurinne. Die Pumpe fördert die
-Nährlösung aus dem Reservoir an das obere Ende der Rinne, von dort fließt sie
-als dünner Film an den Wurzeln entlang und zurück in das Reservoir.
+Netztöpfen, die in Öffnungen eines leicht geneigten Rohrs eingesetzt sind. Die
+Pumpe fördert die Nährlösung über einen Schlauch aus dem Reservoir an das obere
+Ende des Rohrs, von dort fließt sie als dünner Film an den Wurzeln entlang und
+zurück in das Reservoir. Abweichend vom Dauerbetrieb des klassischen NFT läuft
+die Pumpe im Intervall (@kap-software).
 
-Der Füllstandssensor arbeitet berührungslos und erkennt die Flüssigkeit durch
-eine nichtmetallische Behälterwand hindurch. Er wird außen am Reservoir
-befestigt; seine Montagehöhe legt den Mindestfüllstand fest, unterhalb dessen
-die Pumpe gesperrt wird.
+Den Rahmen bildet eine vorne offene, aus Holzbrettern selbst gebaute Holzbox
+(@fig-aufbau):
 
-#todo("Angaben zum Aufbau: Material und Länge der Rinne, Neigung, Anzahl Netztöpfe, Volumen des Reservoirs, Schlauchführung, Montagehöhe des Füllstandssensors, Position von Temperatur- und TDS-Sonde (im Reservoir?)")
+- *Anbaurinne.* Das Rohr ist mit Schraubschellen leicht schräg an der
+  Rückwand der Box befestigt und trägt vier Netztöpfe.
+- *Beleuchtung.* Das Growlight ist oben in der Box angeschraubt, sein
+  Zeitschalter sitzt rechts.
+- *Reservoir und Elektronik.* Unter der Holzbox stehen links das Reservoir und
+  rechts das Elektronikgehäuse, beide aus je einer Kunststoffbox. Im Gehäuse
+  sind ESP32, Steckbrett und MOSFET-Board untergebracht; das Display ist nach
+  vorne ausgerichtet.
+- *Leitungsführung.* Der Förderschlauch führt durch ein passendes Loch in der
+  Holzbox vom Reservoir zum Rohr. Die drei USB-Kabel der Versorgung werden
+  hinten herausgeführt, sodass die Vorderseite frei bleibt.
+
+Die Sensoren sind für Präsentationszwecke nicht fest verbaut. Temperatursensor
+und TDS-Elektrode hängen lose im Reservoir, der Füllstandssensor wird außen an
+die Reservoirwand gehalten. Er arbeitet berührungslos und erkennt die
+Flüssigkeit durch die nichtmetallische Behälterwand hindurch; seine Höhe legt
+den Mindestfüllstand fest, unterhalb dessen die Pumpe gesperrt wird. So lässt
+sich ein sinkender Füllstand vorführen, ohne das Reservoir zu leeren.
+
+Die Netztöpfe sind mit Blähton gefüllt. Das Substrat gibt den Pflanzen Halt,
+speichert selbst kaum Nährstoffe und lässt die Wurzeln durch die Öffnungen der
+Netztöpfe in den Nährfilm wachsen. Die vier Basilikumpflanzen wurden aus
+Stecklingen gezogen, die vollständig in Wasser bewurzelt wurden, bis die
+Wurzeln lang genug für den Einsatz in die Netztöpfe waren.
 
 #figure(
   bild_platzhalter("Foto des Gesamtaufbaus (Rinne, Reservoir, Elektronik)"),
@@ -124,8 +147,6 @@ ein.
   caption: [Strombilanz am USB-Netzteil],
 ) <tab-strombilanz>
 
-#todo("Summen prüfen: CLAUDE.md nennt ~0,9 A Dauer und ~1,5 A Spitze; aus den Einzelwerten ergeben sich 0,61–0,79 A und — falls „+1,0 A“ zusätzlich zum Betriebsstrom gemeint ist — bis ca. 1,8 A. Ist +1,0 A zusätzlich oder 1,0 A Gesamtspitze der Pumpe?")
-
 #figure(
   bild_platzhalter("Foto der Verdrahtung (Steckbrett, MOSFET-Board, ESP32) oder Schaltplan aus Fritzing/KiCad"),
   caption: [Verdrahtung von Steuer- und Leistungskreis],
@@ -181,8 +202,8 @@ Die Inbetriebnahme erfolgt schrittweise, die Pumpe wird zuletzt angeschlossen:
 + *Firmware aufspielen.* Vor dem ersten Flashen prüfen, dass die Strapping-Pins
   unbelegt sind.
 + *Display prüfen.* Die Stiftleisten des #gls("oled")-Displays müssen verlötet
-  sein. Solange sie nur gesteckt waren, fand der I²C-Bus-Scan kein Gerät.
-  Erwartet wird die Adresse 0x3C. #todo("I²C-Adresse durch Bus-Scan bestätigen")
+  sein. Solange sie nur gesteckt waren, fand der I²C-Bus-Scan kein Gerät. Die
+  Firmware spricht das Display unter der Adresse 0x3C an.
 + *Sensoren prüfen.* Der Temperatursensor muss einen plausiblen Wert liefern;
   der Füllstandseingang muss beim Füllen und Leeren des Reservoirs den Pegel
   wechseln.
@@ -233,7 +254,7 @@ Fehler des Referenzgeräts würde unerkannt übernommen. Für die Demonstration 
 relativen Verlaufs, etwa des Anstiegs der Leitfähigkeit, während die Pflanzen
 Wasser aufnehmen, ist das ausreichend.
 
-== Software
+== Software <kap-software>
 
 Die Firmware ist im Arduino-Framework für den ESP32 geschrieben. Die
 Hauptschleife liest zyklisch Füllstand, Temperatur und Sensorspannung, berechnet
@@ -244,11 +265,80 @@ ist in @kap-statuslogik beschrieben.
 Der Pumpenausgang wird in jedem Schleifendurchlauf aus der Bedingung
 `wantPump && waterPresent()` gesetzt. `wantPump` ist der Sollzustand aus dem
 Pumpenzeitplan, `waterPresent()` der aktuelle Zustand des Füllstandssensors.
-Es gibt keinen Pfad, über den die Pumpe ohne aktive Füllstandsprüfung anläuft.
-Diese Verriegelung ist der zentrale Hardwareschutz des Systems.
+Der Zeitplan taktet die Pumpe mit 15 min Laufzeit und 45 min Pause. Der
+Intervallbetrieb senkt den Stromverbrauch der Pumpe und soll in den Pausen die
+Belüftung der Wurzeln verbessern (@kap-verfahren). Die
+Verriegelung greift in beiden Phasen: Auch innerhalb einer Laufphase wird die
+Pumpe abgeschaltet, sobald der Füllstand unter die Sensorhöhe fällt. Es gibt
+keinen Pfad, über den die Pumpe ohne aktive Füllstandsprüfung anläuft. Diese
+Verriegelung ist der zentrale Hardwareschutz des Systems.
 
-#todo("Pumpenzeitplan: Dauerbetrieb (passend zu NFT) oder 15 min an / 45 min aus wie in der aufgespielten Firmware? Widerspruch aus CLAUDE.md vorher klären.")
+#figure(
+  ```cpp
+  bool waterPresent() { return digitalRead(PIN_LEVEL) == LOW; }
 
-#todo("Firmware-Datei bereitstellen: verwendete Bibliotheken, Entwicklungsumgebung, Anzeigeinhalt des OLED, Nutzung von WLAN — und Kernausschnitt der Verriegelung als Listing.")
+  // in loop(), every iteration:
+  bool wantPump = (now % PUMP_CYCLE_MS) < PUMP_ON_MS;
+  digitalWrite(PIN_PUMP, (wantPump && waterPresent()) ? HIGH : LOW);
+  ```,
+  caption: [Pumpenverriegelung in der Hauptschleife],
+) <lst-verriegelung>
 
-Der vollständige Quellcode befindet sich im Anhang.
+@lst-verriegelung zeigt den Kern der Verriegelung. Neben dem Arduino-Kern
+verwendet die Firmware die Bibliotheken `Adafruit_SSD1306` und `Adafruit_GFX`
+für das Display sowie `OneWire` und `DallasTemperature` für den
+Temperatursensor. #gls("wlan") wird nicht genutzt; das System arbeitet
+vollständig lokal. Die Wahl von ADC1 für den TDS-Sensor hält eine spätere
+WLAN-Erweiterung dennoch offen.
+
+Während Pumpe und Status-LEDs in jedem Schleifendurchlauf gesetzt werden,
+erfolgt die Messung alle 30 s. Für einen Messwert bildet die Firmware den
+Median aus 30 Einzelwerten, da der TDS-Sensor mit einer Wechselspannung
+angeregt wird und Einzelwerte Ausreißer enthalten. Ein nicht antwortender
+Temperatursensor wird als ungültiger Wert behandelt und löst den Alarm aus,
+statt den Fehlwert der Bibliothek (−127 °C) in die Kompensation einfließen zu
+lassen. Die Alarmbedingungen werden ebenfalls im 30-s-Takt ausgewertet; die
+Alarm-LED reagiert daher mit bis zu 30 s Verzögerung, die Pumpensperre dagegen
+sofort.
+
+Das Display zeigt in zwei Spalten die Temperatur in °C und die Leitfähigkeit in
+µS/cm. Neben jedem Wert steht ein Symbol: Pfeil nach oben (zu hoch), Pfeil nach
+unten (zu niedrig) oder Haken (im Zielbereich). Damit ist die Bewertung ohne
+Kenntnis der Zielbereiche ablesbar. Liefert der Temperatursensor keinen Wert,
+erscheint „\-\-.\-“.
+
+Für die Kalibrierung besitzt die Firmware einen eigenen Modus
+(`CALIBRATION_MODE`). Darin bleibt die Pumpe gesperrt, und Display und serielle
+Schnittstelle zeigen statt der Leitfähigkeit die gemessene Sensorspannung mit
+vier Nachkommastellen und die Temperatur an.
+
+Der vollständige Quellcode befindet sich im Anhang (@lst-firmware).
+
+== Pflanzenversorgung ohne Pumpenbetrieb <kap-ohne-betrieb>
+
+Bei Transport, Lagerung oder längeren Zeiten ohne Stromversorgung können die
+Pflanzen ohne Pumpe versorgt werden. Diese Betriebsart wurde im Projekt nicht
+erprobt und ist als Empfehlung für den Einsatz an Schulen zu verstehen. Dazu
+werden die Netztöpfe aus dem Rohr genommen und direkt in das Reservoir gesetzt,
+etwa in einen Deckel mit passenden Öffnungen. Die Wurzeln hängen dann
+unmittelbar in der Nährlösung. Das entspricht dem passiven Kratky-Verfahren,
+das als Hauptverfahren verworfen wurde (@kap-verfahren), sich aber als
+Überbrückung eignet, weil es weder Pumpe noch Steuerung benötigt.
+
+Dabei ist Folgendes zu beachten:
+
+- *Füllhöhe.* Die Wurzeln müssen in die Lösung eintauchen, Blähton und
+  Pflanzenansatz sollen oberhalb des Pegels bleiben, damit sie nicht dauerhaft
+  nass stehen.
+- *Luftraum.* Mit sinkendem Pegel entsteht zwischen Lösung und Netztopf ein
+  Luftraum, aus dem die oberen Wurzeln Sauerstoff aufnehmen. Das Reservoir wird
+  daher nicht ständig bis zum Rand nachgefüllt, sondern erst, wenn die Wurzeln
+  die Lösung nicht mehr erreichen.
+- *Licht.* Das Growlight hat ein eigenes Netzteil und einen eigenen Timer und
+  kann unabhängig vom ESP32 weiterlaufen.
+- *Keine Überwachung.* Ohne Steuerung entfallen Füllstands- und
+  Temperaturalarm. Füllstand und Zustand der Pflanzen sind manuell zu prüfen.
+
+Für die Wiederaufnahme des Betriebs werden die Netztöpfe in das Rohr
+zurückgesetzt und die Prüfschritte der Inbetriebnahme ab der Sensorprüfung
+wiederholt.

@@ -70,6 +70,9 @@ Zwei Ebenen, im Text sauber getrennt:
 NFT (Nutrient Film Technique), Kulturpflanze Basilikum.
 Verworfene Alternativen mit Begründung: DWC, Ebbe-Flut, Kratky, Aeroponik.
 
+Versorgung ohne Pumpenbetrieb (Transport, Lagerung): Netztöpfe direkt ins
+Reservoir stellen, passiv nach dem Kratky-Prinzip (Kapitel 4).
+
 ### Hardware
 
 | Komponente | Typ | Details |
@@ -84,6 +87,19 @@ Verworfene Alternativen mit Begründung: DWC, Ebbe-Flut, Kratky, Aeroponik.
 | Status-LEDs | 3 Stück, je 220 Ω | grün / gelb / rot |
 | Schaltelement | P2003BDG MOSFET-Trigger-Board | N-Channel Logic Level, Vgs(th) 1–3 V, 25 V / 28 A, Rds(on) 20 mΩ @ 10 V |
 | Referenz | Handheld-TDS/EC-Messgerät | |
+
+### Mechanik und Pflanzen
+
+| Komponente | Details |
+|---|---|
+| Holzplatte | Grundplatte |
+| Rohr | Anbaurinne, Netztöpfe in Öffnungen |
+| Schraubschellen | Befestigung des Rohrs |
+| Netztöpfe | Anzahl unbekannt |
+| 2 Plastikboxen | eine als Reservoir, eine als Elektronikgehäuse |
+| Schlauch | Förderleitung |
+| Blähton | Substrat |
+| Basilikumsetzlinge | Anzahl unbekannt |
 
 Der P2003BDG ist ausdrücklich ein **Logic-Level-MOSFET** und schaltet bei
 3,3 V Gate-Spannung durch. Das ist der wesentliche Unterschied zu den häufig
@@ -154,7 +170,7 @@ nur der Gate-Steuerstrom im Mikroampere-Bereich.
 | TDS-Modul | 0,01 A |
 | DS18B20 + Füllstandssensor | <0,01 A |
 | 3 Status-LEDs | 0,02 A |
-| **Summe am USB-Netzteil** | **~0,9 A, Spitze ~1,5 A** |
+| **Summe am USB-Netzteil** | **0,61–0,79 A, Spitze max. ~1,8 A** (vom Nutzer bestätigt) |
 
 Das Growlight (2 A) läuft über sein eigenes Netzteil und geht nicht in diese
 Bilanz ein.
@@ -209,44 +225,56 @@ die Pflanzen Wasser aufnehmen) ist das ausreichend.
 | Größe | Bereich |
 |---|---|
 | EC | 1000–1600 µS/cm |
-| pH | 5,5–6,5 (manuell) |
+| pH | 5,5–6,5 (im Projekt nicht gemessen) |
 | Wassertemperatur | 18–24 °C |
 | Beleuchtung | 12 h (Timer des Growlights) |
 
 ### Bewusste Abgrenzungen
 
-- **pH wird manuell gemessen** — pH-Sonden mit ausreichender Qualität sprengen
-  das Budget; eine driftende Billigsonde in einem Regelkreis ist riskanter als
-  manuelle Kontrolle.
-- **Keine automatische Dosierung** — nur eine Dosierpumpe vorgesehen,
-  Regelkreis bewusst nicht geschlossen.
+- **Keine pH-Messung** — pH-Sonden mit ausreichender Qualität sprengen das
+  Budget; eine driftende Billigsonde in einem Regelkreis ist riskanter als gar
+  keine. Der pH-Wert wurde im Projekt auch manuell nicht gemessen (Limitation
+  im Fazit).
+- **Keine automatische Dosierung** — keine Dosierpumpe beschafft (nicht im
+  Budget), Regelkreis bewusst nicht geschlossen.
 - **Budget ca. 100 €** (Erstattungsgrenze der Hochschule).
 
 ### Offen — vom Nutzer zu klären
 
-- `TODO:` I²C-Adresse des OLED. Erwartet wird 0x3C, der Bus-Scan war bis zur
-  Verlötung der Stiftleisten nicht erfolgreich. Vor Abgabe durch einen Scan
-  bestätigen.
+- I²C-Adresse des OLED: 0x3C, so im Quellcode (geklärt).
 - `TODO:` tatsächliche Einzelpreise und Bezugsquellen für die Stückliste
 - `TODO:` Gruppengröße und Aufgabenverteilung
-- `TODO:` Taktung der Pumpe im Betrieb (siehe Widerspruch unten)
 
 ### Zu klärende Widersprüche
 
-Zwei Punkte stehen quer zum restlichen Dokument und müssen vor dem Schreiben
-von Kapitel 2 und 4 entschieden werden:
+1. **NFT und Pumpentaktung — entschieden:** Die Firmware bleibt bei
+   15 min an / 45 min aus. Der Text beschreibt den Aufbau als NFT mit
+   Intervallbetrieb der Pumpe und legt die Abweichung vom klassischen
+   Dauerbetrieb offen. Begründung der Taktung: geringerer Stromverbrauch und
+   bessere Wurzelbelüftung in den Pausen.
+2. **Projektstatus — geklärt:** Das System ist abgegeben. Verlötung des
+   Displays, Kalibrierung und alle Tests fanden vor der Abgabe statt.
 
-1. **NFT und Pumpentaktung.** NFT setzt einen durchgehenden Nährfilm voraus;
-   Abschnitt "Verfahren" nennt Dauerbetrieb der Pumpe. Die aufgespielte Firmware
-   taktet dagegen 15 min an / 45 min aus, was für Ebbe-Flut, nicht für NFT
-   passt. Entweder wird die Firmware auf Dauerbetrieb geändert oder das
-   Verfahren im Text korrigiert. Eine Ausarbeitung, die NFT beschreibt und
-   getaktete Software zeigt, ist angreifbar.
-2. **Projektstatus.** Abschnitt 1 beschreibt das System als abgeschlossen,
-   abgegeben und physisch nicht mehr existent. Die Inbetriebnahme — Verlötung
-   des Displays, Kalibrierung, Verriegelungstest — fand danach statt. Entweder
-   ist der Status in Abschnitt 1 veraltet oder die Formulierung muss angepasst
-   werden; der Methodenabsatz in Kapitel 5 hängt daran.
+### Firmware und Tests (vom Nutzer bestätigt)
+
+- Firmware: `src/res/firmware.txt`. Kein WLAN, rein lokaler Betrieb.
+- T1 Temperatur: in kaltem und warmem Wasser getestet, rote LED hat reagiert.
+  Kein Referenzthermometer.
+- T3: rote LED hat reagiert. Wasserkreislauf hat funktioniert.
+- NFT bestätigt (Nutzer, nicht Ebbe-Flut).
+- Aufbau: vorne offene Holzbox (keine Holzplatte), Rohr leicht schräg an der
+  Rückwand, 4 Netztöpfe/4 Pflanzen. Unter der Box links Reservoir, rechts
+  Elektronikbox; Display nach vorne; Growlight oben angeschraubt, Timer rechts;
+  3 USB-Kabel hinten raus. Sensoren lose (für Vorführung beweglich).
+  Pflanzen aus Stecklingen in Wasser bewurzelt. Holzbox aus Holzbrettern
+  selbst gebaut. Schlauch führt durch ein passendes Loch in der Box.
+- Kratky-Überbrückung ohne Pumpe: im Projekt nicht erprobt, bleibt als
+  Empfehlung im Text.
+- T2 EC: Die Dreipunktkalibrierung war der Test; keine weitere Kontrollmessung.
+- T3 Füllstand: Sensor an der Wand über/unter den Wasserspiegel bewegt.
+- T4 Pumpe: reagiert auf den Füllstandssensor, Takt passt, mit 1000-µF-Kondensator
+  kein Reset; ohne Kondensator nicht getestet.
+- Keine weiteren Tests, keine Erprobung mit Schülern.
 
 ---
 

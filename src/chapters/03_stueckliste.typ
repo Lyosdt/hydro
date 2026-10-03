@@ -3,7 +3,7 @@
 
 // Kapitel 3 — Budget: 1,5 Seiten
 // Pflichtbestandteil: Bauteilstückliste
-// Nur Komponenten aus CLAUDE.md Abschnitt 3 aufnehmen.
+// Nur Komponenten aus CLAUDE.md Abschnitt 3 aufnehmen (inkl. Mechanik und Pflanzen).
 // Preise: Einzelpreis in €, `none` solange unbekannt. Bereits vorhandene Teile:
 // quelle: "vorhanden", preis: 0.
 
@@ -22,40 +22,48 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
   stueckliste(
     (
       "Steuerung und Anzeige",
-      (bezeichnung: "Mikrocontroller", typ: "ESP32 DevKit, WROOM, 30 Pin", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Display", typ: "OLED SSD1306, 128 × 32 px, I²C", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Status-LED", typ: "grün, gelb, rot", anzahl: 3, quelle: none, preis: none),
-      (bezeichnung: "Vorwiderstand LED", typ: "220 Ω", anzahl: 3, quelle: none, preis: none),
-      (bezeichnung: "Steckbrett", typ: "Breadboard", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Mikrocontroller", typ: "ESP32 DevKit, WROOM, 30 Pin", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Display", typ: "OLED SSD1306, 128 × 32 px, I²C", anzahl: 1, quelle: "Amazon", preis: 2.99),
+      (bezeichnung: "Status-LED", typ: "grün, gelb, rot", anzahl: 3, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Vorwiderstand LED", typ: "220 Ω", anzahl: 3, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Steckbrett", typ: "Breadboard", anzahl: 1, quelle: "Amazon", preis: 9.99),
+      (bezeichnung: "Jumperwire", typ: "Jumperwire für Breadboard F-F, F-M, M-M", anzahl: 1, quelle: "Amazon", preis: 6.99),
 
       "Sensorik",
-      (bezeichnung: "Leitfähigkeitssensor", typ: "TDS analog, Gravity-Bauform, 5 V", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Temperatursensor", typ: "DS18B20, wasserdicht, OneWire", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Pull-up-Widerstand", typ: "4,7 kΩ (OneWire-Bus)", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Füllstandssensor", typ: "XKC-Y25-NPN, berührungslos", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Leitfähigkeitssensor", typ: "TDS analog, Gravity-Bauform, 5 V", anzahl: 1, quelle: "Amazon", preis: 8.09),
+      (bezeichnung: "Temperatursensor", typ: "DS18B20, wasserdicht, OneWire", anzahl: 1, quelle: "Amazon", preis: 8.07),
+      (bezeichnung: "Pull-up-Widerstand", typ: "4,7 kΩ (OneWire-Bus)", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Füllstandssensor", typ: "XKC-Y25-NPN, berührungslos", anzahl: 1, quelle: "Amazon", preis: 10.39),
 
       "Leistungspfad Pumpe",
-      (bezeichnung: "Schaltmodul", typ: "MOSFET-Board P2003BDG, N-Kanal, Logic Level", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Wasserpumpe", typ: "5 V, USB-A-Stecker", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "USB-Netzteil", typ: "5 V, 2 A", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "USB-A-Pigtail", typ: "Stecker (männlich), Netzteilseite", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "USB-A-Pigtail", typ: "Buchse (weiblich), Pumpenseite", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Freilaufdiode", typ: "1N4007", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Elektrolytkondensator", typ: "1000 µF", anzahl: 1, quelle: none, preis: none),
-
+      (bezeichnung: "Schaltmodul", typ: "MOSFET-Board P2003BDG, N-Kanal, Logic Level", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Wasserpumpe", typ: "5 V, USB-A-Stecker", anzahl: 1, quelle: "Amazon", preis: 8.95),
+      (bezeichnung: "USB-Netzteil", typ: "5 V, 2 A", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "USB-A-Pigtail", typ: "Stecker (männlich), Netzteilseite & Buchse (weiblich), Pumpenseite", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Freilaufdiode", typ: "1N4007", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Elektrolytkondensator", typ: "1000 µF", anzahl: 1, quelle: "vorhanden", preis: 0),
       "Beleuchtung",
-      (bezeichnung: "LED-Growlight", typ: "5 V, 2 A, interner Timer", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Netzteil Growlight", typ: todo("Typ; im Lieferumfang des Growlights enthalten?"), anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "LED-Growlight", typ: "5 V, 2 A, interner Timer, mit Netzteil", anzahl: 1, quelle: "Amazon", preis: 16.59),
 
-      "Messmittel",
-      (bezeichnung: "Referenzmessgerät", typ: "Handheld-TDS/EC-Messgerät", anzahl: 1, quelle: none, preis: none),
+      "Mechanischer Aufbau",
+      (bezeichnung: "Rahmen", typ: "Holzbox, vorne offen, aus Holzbrettern selbst gebaut", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Anbaurohr", typ: "Rohr mit Öffnungen für die Netztöpfe", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Rohrbefestigung", typ: "Schraubschelle", anzahl: none, quelle: none, preis: none),
+      (bezeichnung: "Netztopf", typ: "Pflanzkorb für Hydrokultur", anzahl: 4, quelle: none, preis: none),
+      (bezeichnung: "Reservoir", typ: "Plastikbox", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Elektronikgehäuse", typ: "Plastikbox", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Schlauch", typ: "Förderleitung Pumpe → Rohr", anzahl: 1, quelle: none, preis: none),
+
+      "Pflanzen und Substrat",
+      (bezeichnung: "Substrat", typ: "Blähton", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "Pflanzen", typ: "Basilikum, Steckling in Wasser bewurzelt", anzahl: 4, quelle: none, preis: none),
     ),
     budget: 100,
   ),
   caption: [Bauteilstückliste des Demonstrators],
 ) <tab-stueckliste>
 
-#todo("Mechanischer Aufbau und Verbrauchsmaterial fehlen in der Liste. Bitte angeben, was verwendet wurde (Typ, Anzahl, Quelle): Anbaurinne, Reservoir, Netztöpfe (laut Projektauftrag); ggf. Schlauch, Pflanzsubstrat, Nährstoffkonzentrat, Saatgut bzw. Basilikumpflanzen, Verbindungskabel, Stiftleisten, Messmittel für die manuelle pH-Kontrolle.")
+#todo("Mechanik und Pflanzen: Anzahl der Schraubschellen; Bezugsquelle und Preis aller Positionen der beiden letzten Gruppen (\"vorhanden\" geht auch). Außerdem: Welches Nährstoffkonzentrat wurde verwendet (Produkt, Quelle, Preis)?")
 
 Zwei Positionen gehören nicht zum Steuerkreis des ESP32. Das Growlight wird
 über ein eigenes Netzteil versorgt und durch seinen internen Timer geschaltet;
@@ -64,8 +72,6 @@ Handheld-Messgerät diente als Referenz für die Kalibrierung der
 Leitfähigkeitsmessung (@kap-kalibrierung) und ist kein Bestandteil des
 Demonstrators.
 
-Bewusst nicht enthalten ist eine pH-Sonde. Die pH-Kontrolle erfolgt manuell,
-weil Sonden mit ausreichender Messqualität das Budget überschritten hätten
-(@kap-abgrenzung).
-
-#todo("Wurde eine Dosierpumpe beschafft? Laut CLAUDE.md „vorgesehen“ — falls gekauft, in die Liste aufnehmen.")
+Bewusst nicht enthalten sind eine pH-Sonde mit ausreichender Messqualität und
+eine Dosierpumpe; beide hätten den Budgetrahmen überschritten. Der pH-Wert wurde
+im Projekt nicht gemessen (@kap-abgrenzung).

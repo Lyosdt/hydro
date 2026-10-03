@@ -10,26 +10,27 @@
 }
 
 // Bill of materials. Each entry is either a position
-//   (bezeichnung: "...", typ: "...", anzahl: 1, quelle: "..." | none, preis: 4.99 | none)
+//   (bezeichnung: "...", typ: "...", anzahl: 1 | none, quelle: "..." | none, preis: 4.99 | none)
 // or a string/content that is rendered as a group header row.
-// `preis` is the unit price in €. A missing price or source is shown as TODO,
-// and the total is only computed once every price is known.
+// `preis` is the unit price in €. A missing quantity, price or source is shown
+// as TODO, and the total is only computed once every quantity and price is known.
 // `budget` (optional, in €) adds a budget and difference row.
 #let stueckliste(eintraege, budget: none) = {
   let positionen = eintraege.filter(e => type(e) == dictionary)
   // Each empty cell counts as an open TODO (see `entwurf` in main.typ)
   let missing = [#metadata("Stückliste")<todo-marker>#text(red, weight: "bold", "TODO")]
-  let summe_bekannt = positionen.all(p => p.preis != none)
-  let summe = positionen.map(p => if p.preis == none { 0 } else { p.preis * p.anzahl }).sum(default: 0)
+  let bekannt(p) = p.preis != none and p.anzahl != none
+  let summe_bekannt = positionen.all(bekannt)
+  let summe = positionen.map(p => if bekannt(p) { p.preis * p.anzahl } else { 0 }).sum(default: 0)
 
   let zeile(e) = if type(e) == dictionary {
     (
       e.bezeichnung,
       e.typ,
-      str(e.anzahl),
+      if e.anzahl == none { missing } else { str(e.anzahl) },
       if e.quelle == none { missing } else { e.quelle },
       if e.preis == none { missing } else { eur(e.preis) },
-      if e.preis == none { missing } else { eur(e.preis * e.anzahl) },
+      if bekannt(e) { eur(e.preis * e.anzahl) } else { missing },
     )
   } else {
     (table.cell(colspan: 6, inset: (top: 9pt, rest: 5pt), emph(strong(e))),)
