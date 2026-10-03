@@ -6,14 +6,15 @@
 	language: language,
 	title: "NFT-Hydroponik mit ESP32",
 	subtitle: "Automatisierter Basilikum-Demonstrator für den Schuleinsatz",
-	module: todo("Modulbezeichnung"),
+	module: "Gebäudeatomatisation",
 	// Ein Eintrag je Gruppenmitglied
 	authors: (
-		(name: "Lyonel Stadthoewer", matnr: todo("Matrikelnummer")),
+		(name: "Lyonel Stadthoewer", matnr: 13086),
+		(name: "Antonio Steinhauer", matnr: 00000),
 	),
-	programme: todo("Studiengang, Zenturie"),
-	lecturer: todo("Dozent"),
-	date: todo("Abgabedatum"),
+	programme: "Wirtschaftsinformatik I23c",
+	lecturer: "Haase",
+	date: "04.10.2026",
 	// Vor der Abgabe auf false setzen: Kompilierung schlägt fehl, solange TODOs offen sind
 	entwurf: true,
 	// Kapitel nicht auf neuer Seite beginnen (Seitenumfang)
