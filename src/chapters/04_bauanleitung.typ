@@ -20,7 +20,7 @@
 == Inbetriebnahme
 #todo("Inbetriebnahme")
 
-== Kalibrierung der EC-Messung
+== Kalibrierung der EC-Messung <kap-kalibrierung>
 // Dreipunktkalibrierung, quadratische Anpassung, Gültigkeitsbereich,
 // fehlende Referenzlösung offenlegen.
 #todo("Kalibrierung")

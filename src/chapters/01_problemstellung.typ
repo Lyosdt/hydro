@@ -17,6 +17,6 @@
 // Kapitel 6 fasst das Ergebnis zusammen.
 #todo("Tabelle Zielkriterien K1–K6")
 
-== Abgrenzung
+== Abgrenzung <kap-abgrenzung>
 // pH manuell, keine automatische Dosierung, Budget ca. 100 €.
 #todo("Text Abgrenzung")
