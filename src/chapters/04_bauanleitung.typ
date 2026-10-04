@@ -28,8 +28,7 @@ Den Rahmen bildet eine vorne offene, aus Holzbrettern selbst gebaute Holzbox
   rechts das Elektronikgehäuse, beide aus je einer Kunststoffbox. Im Gehäuse
   sind ESP32, Steckbrett und MOSFET-Board untergebracht; das Display ist nach
   vorne ausgerichtet.
-- *Leitungsführung.* Der Förderschlauch führt durch ein passendes Loch in der
-  Holzbox vom Reservoir zum Rohr. Die drei USB-Kabel der Versorgung werden
+- *Leitungsführung.* Der Förderschlauch führt durch ein passendes Loch in das Rohr. Die drei USB-Kabel der Versorgung werden
   hinten herausgeführt, sodass die Vorderseite frei bleibt.
 
 Die Sensoren sind für Präsentationszwecke nicht fest verbaut. Temperatursensor

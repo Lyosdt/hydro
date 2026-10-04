@@ -27,7 +27,7 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
       (bezeichnung: "Status-LED", typ: "grün, gelb, rot", anzahl: 3, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Vorwiderstand LED", typ: "220 Ω", anzahl: 3, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Steckbrett", typ: "Breadboard", anzahl: 1, quelle: "Amazon", preis: 9.99),
-      (bezeichnung: "USB-Netzteil", typ: "Versorgung ESP32, mit USB-Kabel", anzahl: 1, quelle: none, preis: none),
+      (bezeichnung: "USB-Netzteil", typ: "Versorgung ESP32, mit USB-Kabel", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Jumperwire", typ: "Jumperwire für Breadboard F-F, F-M, M-M", anzahl: 1, quelle: "Amazon", preis: 6.99),
 
       "Sensorik",
@@ -67,5 +67,4 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
 #todo("Mechanik und Pflanzen: Bezugsquelle und Preis aller Positionen der beiden letzten Gruppen (\"vorhanden\" geht auch). Außerdem: Welches Nährstoffkonzentrat wurde verwendet (Produkt, Quelle, Preis)?")
 
 Das Handheld-Messgerät diente nur als Referenz für die Kalibrierung und ist
-nicht aufgeführt; pH-Sonde und Dosierpumpe sind bewusst nicht enthalten
-(@kap-abgrenzung).
+nicht aufgeführt.
