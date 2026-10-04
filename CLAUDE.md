@@ -274,7 +274,7 @@ die Pflanzen Wasser aufnehmen) ist das ausreichend.
   `src/res/HydroAufbau.jpg`) links Reservoir, rechts Elektronikbox; Display nach vorne; Growlight oben angeschraubt, Timer rechts;
   3 USB-Kabel hinten raus. Sensoren lose (für Vorführung beweglich).
   Pflanzen aus Stecklingen in Wasser bewurzelt. Holzbox aus Holzbrettern
-  selbst gebaut. Schlauch führt durch ein passendes Loch in der Box.
+  selbst gebaut. Schlauch führt durch ein passendes Loch in das Rohr.
 - Kratky-Überbrückung ohne Pumpe: im Projekt nicht erprobt, bleibt als
   Empfehlung im Text.
 - T2 EC: Die Dreipunktkalibrierung war der Test; keine weitere Kontrollmessung.
