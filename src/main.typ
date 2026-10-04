@@ -23,8 +23,12 @@
 )
 
 // Lange Tabellen dürfen umbrechen (Kopfzeile wird wiederholt), statt als
-// Ganzes auf die nächste Seite zu springen
+// Ganzes auf die nächste Seite zu springen. Kurze Tabellen (unter 9 cm)
+// bleiben zusammen, damit keine einzelnen Zeilen abgetrennt werden.
 #show figure.where(kind: table): set block(breakable: true)
+#show figure.where(kind: table): it => layout(size => {
+  if measure(it, width: size.width).height < 9cm { block(breakable: false, it) } else { it }
+})
 
 #include "chapters/01_problemstellung.typ"
 #include "chapters/02_konzept.typ"

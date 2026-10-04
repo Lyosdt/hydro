@@ -1,12 +1,24 @@
+#import "../const.typ": nordakademie_blue
+
+// Default table style: tinted header, thin rules between rows, closing rule
+// at the bottom. Cell text is set ragged-right, since justified text tears
+// apart in narrow columns.
 #let table_style_1(table_content) = {
+  set text(size: 10pt)
+  set par(justify: false, leading: 0.55em)
   show table.cell.where(y: 0): strong
+  show table: it => block(stroke: (bottom: 0.8pt + nordakademie_blue), it)
   set table(
-    stroke: (x, y) => if y == 0 {
-      (bottom: 0.7pt + black)
-    },
+    fill: (x, y) => if y == 0 { nordakademie_blue.lighten(88%) },
+    stroke: (x, y) => (
+      top: if y == 0 { 0.8pt + nordakademie_blue }
+        else if y == 1 { 0.6pt + nordakademie_blue }
+        else { 0.4pt + luma(200) },
+    ),
+    inset: (x: 6pt, y: 5pt),
     align: (x, y) => (
-      if x > 0 { center }
-      else { left }
+      if x > 0 { center + top }
+      else { left + top }
     ),
   )
   table_content

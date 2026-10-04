@@ -12,7 +12,7 @@ ist.
 #figure(
   table_style_1(
     table(
-      columns: (1fr, auto),
+      columns: (auto, auto),
       align: left,
       table.header([Kapitel], [Verantwortlich]),
       [1 Problemstellung und Zielsetzung], [Lyonel Stadthoewer],
@@ -76,7 +76,7 @@ Bilanz ein (@tab-strombilanz).
 #figure(
   table_style_1(
     table(
-      columns: (1fr, auto),
+      columns: (auto, auto),
       table.header([Verbraucher], [Stromaufnahme]),
       table.cell(colspan: 2, align: left, emph[USB-Netzteil Pumpe (5 V / 2 A)]),
       [Pumpe, Betrieb], [ca. 0,5 A],
