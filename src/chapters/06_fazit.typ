@@ -7,13 +7,14 @@
 == Ergebnis
 
 Der Demonstrator, eine NFT-Anlage für vier Basilikumpflanzen mit
-funktionierendem Kreislauf, erfüllt vier der sechs Zielkriterien
-(@tab-soll-ist). Die Pumpe läuft selbstständig im vorgesehenen Takt (K5), die
+funktionierendem Kreislauf, erfüllt vier der sechs Zielkriterien vollständig
+und die übrigen zwei teilweise (@tab-soll-ist). Die Pumpe läuft selbstständig im vorgesehenen Takt (K5), die
 Verriegelung verhindert einen Trockenlauf (K4), und niedriger Füllstand sowie
 Temperaturen außerhalb des Zielbereichs werden gemeldet (K1, K3). Damit ist die
 technische Problemstellung gelöst. Die Leitfähigkeitsmessung (K2) ist
-kalibriert, aber nur relativ zum Referenzgerät belegt. Die Ablesbarkeit für die
-Zielgruppe (K6) ist umgesetzt, aber nicht geprüft.
+kalibriert, aber nur relativ zum Referenzgerät belegt. Die Anzeige am Gerät
+(K6) war in allen Tests in Gebrauch. Ob sie auch ohne Vorwissen verständlich
+ist, ist mangels Erprobung mit Schülern noch offen.
 
 == Limitationen
 

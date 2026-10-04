@@ -27,7 +27,7 @@ der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
   zeitraum: [Aufbauphase, vor der Abgabe],
   kriterium: [K1],
   vorgehen: [Der DS18B20 wurde nacheinander in kaltes und in warmes Wasser
-    getaucht und der Messwert abgelesen.],
+    getaucht und der Messwert am Display abgelesen.],
   beobachtung: [Der Messwert folgte dem Wechsel zwischen kaltem und warmem
     Wasser in der erwarteten Richtung, und die rote Alarm-LED zeigte die
     Temperatur außerhalb des Zielbereichs an. Ein Abgleich gegen ein
@@ -77,11 +77,13 @@ der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
   zeitraum: [Aufbauphase, vor der Abgabe],
   kriterium: [K4, K5],
   vorgehen: [Bei angeschlossener Pumpe wurde der Füllstandssensor wie in T3
-    bewegt und die Reaktion der Pumpe beobachtet. Außerdem wurde der Pumpentakt
+    bewegt, auch während die Pumpe lief, und die Reaktion der Pumpe beobachtet.
+    Außerdem wurde der Pumpentakt
     im Normalbetrieb beobachtet. Der Leistungspfad war dabei mit dem
     1000-µF-Kondensator an VIN bestückt (@kap-schaltplan).],
   beobachtung: [Die Pumpe reagierte auf den Füllstandssensor und lief nicht,
-    solange er keine Flüssigkeit erkannte. Im Betrieb funktionierte der
+    solange er keine Flüssigkeit erkannte. Eine laufende Pumpe schaltete ab,
+    sobald der Sensor über den Wasserspiegel geschoben wurde. Im Betrieb funktionierte der
     Kreislauf, die Nährlösung floss durch das Rohr zurück in das Reservoir. Der
     Takt entsprach der Vorgabe von 15 min Laufzeit und 45 min Pause. Beim
     Anlauf der Pumpe wurde der ESP32 nicht zurückgesetzt. Ein Betrieb ohne
@@ -106,12 +108,16 @@ Ergebnis zu.
       [K3 Füllstand], [T3], bewertung_badge("erfüllt"),
       [K4 Trockenlaufschutz], [T4], bewertung_badge("erfüllt"),
       [K5 Pumpenbetrieb], [T4], bewertung_badge("erfüllt"),
-      [K6 Ablesbarkeit], [—], bewertung_badge("nicht geprüft"),
+      [K6 Ablesbarkeit], [T1–T4], bewertung_badge("teilweise erfüllt"),
     ),
   ),
   caption: [Soll-Ist-Abgleich der Zielkriterien],
 ) <tab-soll-ist>
 
 Damit ist der Kern der technischen Problemstellung nachgewiesen (K1, K3–K5).
-K6 wurde nicht geprüft, da keine Erprobung mit Schülern stattfand. Die
+K6 wurde in keinem eigenen Testfall geprüft, die Anzeige war aber in allen
+Tests in Gebrauch. Messwerte und Bewertungssymbole wurden am Display abgelesen,
+Alarm und Pumpenzustand an den Status-LEDs. Damit ist belegt, dass der Zustand
+direkt am Gerät und ohne Rechner ablesbar ist. Ob das auch ohne Vorwissen
+gelingt, bleibt offen, da keine Erprobung mit Schülern stattfand. Die
 Einschränkungen bei K2 und K6 greift @kap-fazit auf.

@@ -99,7 +99,8 @@ Reservoir stellen, passiv nach dem Kratky-Prinzip (Kapitel 4).
 | 2 Plastikboxen | eine als Reservoir, eine als Elektronikgehäuse |
 | Schlauch | Förderleitung |
 | Blähton | Substrat |
-| Basilikumsetzlinge | Anzahl unbekannt |
+| Basilikumsetzlinge | 4 Stecklinge von einer Supermarktpflanze, nicht im Budget |
+| Nährstoffkonzentrat | NPK-Flüssigdünger für Hydrokultur und Kräuter, vorhanden |
 
 Der P2003BDG ist ausdrücklich ein **Logic-Level-MOSFET** und schaltet bei
 3,3 V Gate-Spannung durch. Das ist der wesentliche Unterschied zu den häufig
@@ -280,7 +281,15 @@ die Pflanzen Wasser aufnehmen) ist das ausreichend.
 - T2 EC: Die Dreipunktkalibrierung war der Test; keine weitere Kontrollmessung.
 - T3 Füllstand: Sensor an der Wand über/unter den Wasserspiegel bewegt.
 - T4 Pumpe: reagiert auf den Füllstandssensor, Takt passt, mit 1000-µF-Kondensator
-  kein Reset; ohne Kondensator nicht getestet.
+  kein Reset; ohne Kondensator nicht getestet. Laufende Pumpe schaltet ab, wenn
+  der Sensor über den Wasserspiegel geschoben wird (bestätigt).
+- Display: in allen Tests benutzt (Werte in T1 am Display abgelesen). K6 daher
+  „teilweise erfüllt“ (Anzeige belegt, Wirkung auf Schüler offen).
+- Versorgung laut `Projektbauplan.md`: XKC-Y25 5 V, TDS 5 V, DS18B20 3V3,
+  LEDs Anode an GPIO, Kathode über 220 Ω an GND. OLED an 3V3 (Nutzer).
+  Der Bauplan ist ein Vorstand: rote LED dort noch GPIO 21 (final 23), lineare
+  Kalibrierung (final quadratisch), Steckbrett-Schiene aus MOSFET-VIN gespeist
+  (laut Nutzer final: ESP32 mit eigenem Netzteil, TDS am 5-V-Pin des ESP32).
 - Keine weiteren Tests, keine Erprobung mit Schülern.
 
 ---

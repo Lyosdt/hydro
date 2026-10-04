@@ -40,7 +40,7 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
       (bezeichnung: "Schaltmodul", typ: "MOSFET-Board P2003BDG, N-Kanal, Logic Level", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Wasserpumpe", typ: "5 V, USB-A-Stecker", anzahl: 1, quelle: "Amazon", preis: 8.95),
       (bezeichnung: "USB-Netzteil", typ: "5 V, 2 A, Versorgung Pumpe", anzahl: 1, quelle: "vorhanden", preis: 0),
-      (bezeichnung: "USB-A-Pigtail", typ: "Stecker (männlich), Netzteilseite & Buchse (weiblich), Pumpenseite", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "USB-A-Pigtail-Paar", typ: "Paar aus Stecker (M), Netzteilseite, und Buchse (F), Pumpenseite", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Freilaufdiode", typ: "1N4007", anzahl: 1, quelle: "vorhanden", preis: 0),
       (bezeichnung: "Elektrolytkondensator", typ: "1000 µF", anzahl: 1, quelle: "vorhanden", preis: 0),
       "Beleuchtung",
@@ -55,16 +55,17 @@ die tatsächlichen Projektausgaben abbildet. Die Summe ist dem Budget von ca.
       (bezeichnung: "Elektronikgehäuse", typ: "Plastikbox", anzahl: 1, quelle: none, preis: none),
       (bezeichnung: "Schlauch", typ: "Förderleitung Pumpe → Rohr", anzahl: 1, quelle: none, preis: none),
 
-      "Pflanzen und Substrat",
-      (bezeichnung: "Substrat", typ: "Blähton", anzahl: 1, quelle: none, preis: none),
-      (bezeichnung: "Pflanzen", typ: "Basilikum, Steckling in Wasser bewurzelt", anzahl: 4, quelle: none, preis: none),
+      "Pflanzen, Substrat und Nährstoffe",
+      (bezeichnung: "Substrat", typ: "Blähton", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Nährstoffkonzentrat", typ: "NPK-Flüssigdünger für Hydrokultur und Kräuter", anzahl: 1, quelle: "vorhanden", preis: 0),
+      (bezeichnung: "Pflanzen", typ: "Basilikum, Stecklinge einer Supermarktpflanze, in Wasser bewurzelt, nicht im Budget", anzahl: 4, quelle: "Supermarkt", preis: 0),
     ),
     budget: 100,
   ),
   caption: [Bauteilstückliste des Demonstrators],
 ) <tab-stueckliste>
 
-#todo("Mechanik und Pflanzen: Bezugsquelle und Preis aller Positionen der beiden letzten Gruppen (\"vorhanden\" geht auch). Außerdem: Welches Nährstoffkonzentrat wurde verwendet (Produkt, Quelle, Preis)?")
+#todo("Mechanischer Aufbau: Bezugsquelle und Preis je Position (\"vorhanden\" geht auch).")
 
 Das Handheld-Messgerät diente nur als Referenz für die Kalibrierung und ist
 nicht aufgeführt.

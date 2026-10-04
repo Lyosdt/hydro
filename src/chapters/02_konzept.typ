@@ -24,7 +24,7 @@ Hinblick auf den Einsatz als transportabler, automatisierter Demonstrator.
         als dünner Film an den Wurzeln entlang zurück ins Reservoir fließt.],
       [*Gewählt.* Der Kreislauf ist sichtbar, die Pumpe ist ein schaltbarer
         Aktor, und in der Rinne steht nur wenig Lösung. Vom Projektauftrag
-        vorgegeben.],
+        vorgegeben und für den Demonstrator auch fachlich passend.],
       [#gls("dwc")],
       [Die Wurzeln hängen dauerhaft in einer Lösung, die von einer Luftpumpe
         belüftet wird.],
@@ -120,7 +120,7 @@ elektrische Umsetzung beschreibt @kap-schaltplan.
       [Füllstand], [XKC-Y25-NPN],
       [Kapazitiv durch die Behälterwand, ohne Kontakt zur Lösung.],
       [Pumpe], [MOSFET-Board],
-      [Logic-Level, schaltet mit 3,3 V vom GPIO voll durch.],
+      [Logic-Level, schaltet mit 3,3 V vom GPIO sicher durch.],
       [Anzeige], [OLED 128 × 32],
       [Messwerte mit Bewertungssymbol, #gls("i2c")-Bus.],
       [Status], [3 LEDs],
@@ -171,8 +171,9 @@ Die zentrale Schutzfunktion ist die Pumpenverriegelung. Der Pumpenausgang wird
 in jedem Schleifendurchlauf aus dem Sollzustand des Zeitplans und dem aktuellen
 Signal des Füllstandssensors gebildet. Nur wenn beide
 erfüllt sind, läuft die Pumpe. Es gibt keinen Pfad, über den die Pumpe ohne
-aktive Füllstandsprüfung anläuft, und auch eine laufende Pumpe wird sofort
-abgeschaltet, sobald der Füllstand unter die Sensorhöhe fällt. Beim Start setzt
+aktive Füllstandsprüfung anläuft, und auch eine laufende Pumpe wird im nächsten
+Schleifendurchlauf abgeschaltet, sobald der Füllstand unter die Sensorhöhe
+fällt. Beim Start setzt
 die Firmware den Pumpenausgang als erstes auf Low, damit die Pumpe nicht
 während der Initialisierung anläuft.
 

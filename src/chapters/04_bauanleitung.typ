@@ -100,8 +100,9 @@ Eingang TRIG an. Über diesen Pin fließt nur der Gate-Steuerstrom im
 Mikroampere-Bereich. Den Pumpenstrom führt der ESP32 zu keinem Zeitpunkt.
 
 Der P2003BDG ist ein Logic-Level-MOSFET mit einer Schwellspannung von 1–3 V und
-schaltet bei 3,3 V Gate-Spannung vollständig durch. Darin unterscheidet er sich
-von den verbreiteten IRF520-Boards, die bei 3,3 V nur teilweise durchsteuern.
+schaltet bei 3,3 V Gate-Spannung den Pumpenstrom von ca. 0,5 A sicher durch,
+was der Pumpenbetrieb in T4 bestätigte. Darin unterscheidet er sich von den
+verbreiteten IRF520-Boards, die bei 3,3 V nur teilweise durchsteuern.
 Drei Schutzmaßnahmen ergänzen den Leistungspfad (@tab-schutz).
 
 #figure(
@@ -111,9 +112,9 @@ Drei Schutzmaßnahmen ergänzen den Leistungspfad (@tab-schutz).
       align: left,
       table.header([Maßnahme], [Zweck]),
       [1N4007 über der Pumpe\ (Kathodenring an +)],
-      [Freilaufdiode. Die Motorspule erzeugt beim Abschalten eine Gegenspannung weit über der 25-V-Grenze des MOSFET, die die Diode kurzschließt.],
-      [1000 µF an VIN],
-      [Puffert den Anlaufstrom der Pumpe, damit die Spannung des Pumpen-Netzteils nicht einbricht.],
+      [Freilaufdiode. Die Motorspule erzeugt beim Abschalten eine Spannungsspitze, die die 25-V-Grenze des MOSFET übersteigen kann. Die Diode bietet dem Spulenstrom einen Freilaufpfad und begrenzt so die Spitze. Verkehrt herum würde sie den Pumpenausgang kurzschließen.],
+      [1000 µF an VIN\ (Minus-Streifen an VIN−)],
+      [Puffert den Anlaufstrom der Pumpe, damit die Spannung des Pumpen-Netzteils nicht einbricht. Der Elko ist gepolt und kann verpolt eingebaut ausfallen.],
       [Gemeinsame Masse],
       [Das Board schaltet low-side und benötigt denselben Bezugspunkt wie der ESP32, obwohl beide getrennte Netzteile haben.],
     ),
@@ -121,11 +122,32 @@ Drei Schutzmaßnahmen ergänzen den Leistungspfad (@tab-schutz).
   caption: [Schutzmaßnahmen im Leistungspfad],
 ) <tab-schutz>
 
-Am Netzteil der Pumpe bleibt selbst die Spitze beim Anlauf mit ca. 1,5 A unter
-den 2 A des Netzteils. Der Steuerkreis nimmt rechnerisch höchstens ca. 0,3 A
-auf. Die vollständige Strombilanz (@tab-strombilanz) sowie die GPIO-Belegung
-mit ihren Randbedingungen (@tab-gpio) stehen im Anhang. Jede Status-LED ist mit
-einem 220-Ω-Vorwiderstand beschaltet.
+Selbst der Anlaufstrom der Pumpe bleibt mit ca. 1,5 A unter den 2 A ihres
+Netzteils (Strombilanz in @tab-strombilanz, GPIO-Belegung in @tab-gpio).
+
+@tab-verdrahtung zeigt die Anschlüsse der Sensoren, des Displays und der
+Status-LEDs am Steuerkreis. Die 5-V-Verbraucher hängen am 5-V-Pin des ESP32,
+alle Massen sind gemeinsam geführt.
+
+#figure(
+  table_style_1(
+    table(
+      columns: (auto, auto, 1fr, 1.3fr),
+      align: left,
+      table.header([Bauteil], [Versorgung], [Masse], [Signal]),
+      [XKC-Y25-NPN], [5 V (braun)], [GND (blau)], [GPIO 4 (gelb)],
+      [TDS-Modul], [5 V (rot)], [GND (schwarz)], [GPIO 34 (blau)],
+      [DS18B20], [3V3 (rot)], [GND (schwarz)],
+      [GPIO 5 (gelb), 4,7 kΩ gegen 3V3],
+      [OLED], [3V3], [GND],
+      [SDA GPIO 21, SCL GPIO 22],
+      [Status-LEDs], [—], [Kathode über 220 Ω an GND],
+      [Anode an GPIO 18 / 19 / 23],
+      [MOSFET-Board], [—], [GND (gemeinsam)], [TRIG an GPIO 25],
+    ),
+  ),
+  caption: [Verdrahtung des Steuerkreises (Aderfarben in Klammern)],
+) <tab-verdrahtung>
 
 == Inbetriebnahme
 
@@ -137,8 +159,8 @@ Die Inbetriebnahme erfolgt schrittweise, die Pumpe wird zuletzt angeschlossen:
   sein. Solange sie nur gesteckt waren, fand der I²C-Bus-Scan kein Gerät. Die
   Firmware spricht das Display unter der Adresse 0x3C an.
 + *Sensoren prüfen.* Der Temperatursensor muss einen plausiblen Wert liefern,
-  und der Füllstandseingang muss beim Füllen und Leeren des Reservoirs den Pegel
-  wechseln.
+  und der Füllstandseingang muss den Pegel wechseln, wenn der Sensor an der
+  Reservoirwand über und unter den Wasserspiegel verschoben wird.
 + *Leitfähigkeit kalibrieren* (@kap-kalibrierung).
 + *Pumpe anschließen und Verriegelung prüfen.* Bei leerem Reservoir darf die
   Pumpe nicht anlaufen.
@@ -212,7 +234,9 @@ WLAN-Erweiterung dennoch offen.
 
 Gemessen wird alle 30 s, jeweils als Median aus 30 Einzelwerten gegen die
 Ausreißer der Wechselspannungsanregung. Die Alarm-LED reagiert daher mit bis zu
-30 s Verzögerung, die Pumpensperre dagegen in jedem Schleifendurchlauf sofort.
+30 s Verzögerung, die Pumpensperre dagegen in jedem Schleifendurchlauf. Nur
+während einer Messung (Temperaturwandlung und 30 Einzelwerte) ist die Schleife
+knapp eine Sekunde blockiert, um diese Zeit kann sich die Sperre verzögern.
 
 Für die Kalibrierung besitzt die Firmware einen eigenen Modus
 (`CALIBRATION_MODE`). Darin bleibt die Pumpe gesperrt, und Display und serielle
