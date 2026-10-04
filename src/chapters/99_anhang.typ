@@ -54,16 +54,17 @@ ist.
 Die Belegung folgt vier Randbedingungen des ESP32:
 
 - *TDS-Sensor auf ADC1.* Der Analogeingang muss auf ADC1 (GPIO 32–39) liegen.
-  ADC2 wird vom #gls("wlan")-Treiber belegt; `analogRead` liefert dort
-  unbrauchbare Werte, sobald WLAN aktiv ist. GPIO 34 ist ein reiner Eingang und
-  damit für diese Aufgabe geeignet. Der Sensorausgang (0–2,3 V) bleibt unter
-  der 3,3-V-Grenze des Eingangs; das Modul selbst benötigt zwingend 5 V.
+  ADC2 wird vom #gls("wlan")-Treiber belegt, sodass `analogRead` dort
+  unbrauchbare Werte liefert, sobald WLAN aktiv ist. GPIO 34 ist ein reiner
+  Eingang und damit für diese Aufgabe geeignet. Der Sensorausgang (0–2,3 V)
+  bleibt unter der 3,3-V-Grenze des Eingangs. Das Modul selbst benötigt
+  zwingend 5 V.
 - *Alarm-LED auf GPIO 23.* GPIO 21 ist durch die SDA-Leitung des
   #gls("i2c")-Busses belegt.
 - *Strapping-Pins frei.* GPIO 0, 2, 12 und 15 bleiben unbelegt, da eine Last
   dort den Bootvorgang oder das Flashen blockieren kann. GPIO 5 ist ebenfalls
-  ein Strapping-Pin; der Pull-up des OneWire-Busses hält ihn beim Start auf
-  High.
+  ein Strapping-Pin, den der Pull-up des OneWire-Busses beim Start auf High
+  hält.
 - *Füllstandssensor ohne Pegelwandler.* Der Sensor hat einen
   Open-Collector-Ausgang, der bei erkannter Flüssigkeit nach Masse zieht. Den
   High-Pegel stellt der interne Pull-up des ESP32 mit 3,3 V her.

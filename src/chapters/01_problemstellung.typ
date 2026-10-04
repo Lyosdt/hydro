@@ -19,7 +19,7 @@ Gegenstand dieses Projekts ist ein Demonstrator, der Basilikum in einem
 geschlossenen Kreislauf kultiviert. Der Projektauftrag sieht dafür eine Anlage
 nach der Nutrient Film Technique vor, die von einem ESP32-Mikrocontroller
 gesteuert wird. Er verbindet den Pflanzenanbau mit typischen Aufgaben der
-Gebäude- und Automatisierungstechnik: Datenerfassung, Visualisierung und
+Gebäude- und Automatisierungstechnik wie Datenerfassung, Visualisierung und
 Steuerung. Die Problemstellung hat eine technische und eine didaktische Ebene.
 
 *Technische Ebene.* Damit die Pflanzen gedeihen, muss die Nährlösung in einem
@@ -27,7 +27,7 @@ Zielbereich bleiben. Maßgeblich sind drei Größen:
 
 - *Leitfähigkeit.* Die elektrische Leitfähigkeit (#gls("ec")) der Lösung steigt
   mit der Menge gelöster Nährsalze und dient daher als Maß für die
-  Nährstoffkonzentration. Sie wird in µS/cm oder mS/cm angegeben; für
+  Nährstoffkonzentration. Sie wird in µS/cm oder mS/cm angegeben. Für
   Basilikum liegt der Zielbereich bei 1,0–1,6 mS/cm. Durch die Wasseraufnahme
   der Pflanzen und durch Verdunstung verändert sich die Konzentration im
   laufenden Betrieb.
@@ -51,15 +51,15 @@ ohne Vorwissen erkennen können, in welchem Zustand sich die Anlage befindet.
 Ein Zahlenwert in µS/cm sagt ohne Kenntnis des Zielbereichs jedoch nichts
 darüber aus, ob die Lösung in Ordnung ist. Die Messgrößen müssen daher bewertet
 und so angezeigt werden, dass ihr Zustand auf einen Blick ablesbar ist.
-Außerdem sollen die Vorgänge selbst vorführbar sein: der Wasserkreislauf, das
-Schalten der Pumpe und die Reaktion auf einen Störfall.
+Außerdem sollen sich der Wasserkreislauf, das Schalten der Pumpe und die
+Reaktion auf einen Störfall vorführen lassen.
 
 == Zielkriterien <kap-kriterien>
 // K1–K6 in prüfbarer Form. Kapitel 5 prüft genau diese Kriterien ab,
 // Kapitel 6 fasst das Ergebnis zusammen.
 Aus der Problemstellung und dem Projektauftrag ergeben sich sechs Zielkriterien
 (@tab-kriterien). Sie sind so formuliert, dass sie am Aufbau geprüft werden
-können; @kap-testprotokoll prüft genau diese Kriterien ab.
+können. @kap-testprotokoll prüft genau diese Kriterien ab.
 
 #figure(
   table_style_1(
@@ -77,7 +77,7 @@ können; @kap-testprotokoll prüft genau diese Kriterien ab.
       [Das Unterschreiten des Mindestfüllstands im Reservoir wird erkannt und
         über die Alarm-LED gemeldet.],
       [K4], [Trockenlaufschutz],
-      [Bei unterschrittenem Mindestfüllstand läuft die Pumpe nicht an; eine
+      [Bei unterschrittenem Mindestfüllstand läuft die Pumpe nicht an, und eine
         laufende Pumpe wird abgeschaltet.],
       [K5], [Pumpenbetrieb],
       [Die Pumpe läuft ohne manuellen Eingriff im Takt 15 min an / 45 min aus.
@@ -101,8 +101,8 @@ folgende Abgrenzungen:
 
 - *Keine pH-Messung.* Neben der Leitfähigkeit beeinflusst der pH-Wert
   (Zielbereich für Basilikum 5,5–6,5) die Nährstoffaufnahme. pH-Sonden mit
-  ausreichender Messqualität sprengen das Budget; eine driftende, günstige Sonde
-  wäre in einem Regelkreis riskanter als gar keine Messung. Der pH-Wert wurde
+  ausreichender Messqualität sprengen das Budget. Eine driftende, günstige Sonde
+  wäre in einem Regelkreis zudem riskanter als gar keine Messung. Der pH-Wert wurde
   im Projekt auch manuell nicht gemessen.
 - *Keine automatische Dosierung.* Das System misst und bewertet die
   Leitfähigkeit, korrigiert sie aber nicht. Eine Dosierpumpe wurde nicht
@@ -111,6 +111,6 @@ folgende Abgrenzungen:
 - *Beleuchtung ohne Steuerung durch den ESP32.* Das Growlight wird von seinem
   eigenen Timer für 12 h am Tag eingeschaltet.
 - *Keine Datenübertragung.* Die Messwerte werden ausschließlich am Gerät
-  angezeigt; WLAN wird nicht genutzt.
+  angezeigt, WLAN wird nicht genutzt.
 - *Kein Ertragsversuch.* Bewertet wird die Funktion des technischen Systems,
   nicht Wachstum oder Ertrag der Pflanzen.

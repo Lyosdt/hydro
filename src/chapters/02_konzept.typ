@@ -20,45 +20,46 @@ Hinblick auf den Einsatz als transportabler, automatisierter Demonstrator.
       align: left,
       table.header([Verfahren], [Prinzip], [Bewertung]),
       [#gls("nft")],
-      [Eine Pumpe fördert die Lösung in eine leicht geneigte Rinne; sie fließt als
-        dünner Film an den Wurzeln entlang und zurück ins Reservoir.],
+      [Eine Pumpe fördert die Lösung in eine leicht geneigte Rinne, durch die sie
+        als dünner Film an den Wurzeln entlang zurück ins Reservoir fließt.],
       [*Gewählt.* Der Kreislauf ist sichtbar, die Pumpe ist ein schaltbarer
         Aktor, und in der Rinne steht nur wenig Lösung. Vom Projektauftrag
         vorgegeben.],
       [#gls("dwc")],
       [Die Wurzeln hängen dauerhaft in einer Lösung, die von einer Luftpumpe
         belüftet wird.],
-      [Verworfen. Kein sichtbarer Kreislauf; die Luftpumpe läuft dauerhaft ohne
-        Schaltaufgabe; das große Lösungsvolumen erschwert den Transport.],
+      [Verworfen. Der Kreislauf ist nicht sichtbar, und die Luftpumpe läuft
+        dauerhaft ohne Schaltaufgabe. Das große Lösungsvolumen erschwert den
+        Transport.],
       [Ebbe-Flut],
       [Ein Pflanzbecken wird periodisch geflutet und läuft anschließend zurück
         ins Reservoir.],
-      [Verworfen. Benötigt ein eigenes Flutbecken mit Ablauf und mehr Lösung;
-        höherer Aufwand für einen transportablen Aufbau.],
+      [Verworfen. Ein eigenes Flutbecken mit Ablauf und mehr Lösung erhöht den
+        Aufwand für einen transportablen Aufbau.],
       [Kratky],
-      [Passiv: Die Pflanzen sitzen über stehender Lösung, mit sinkendem Pegel
+      [Die Pflanzen sitzen passiv über stehender Lösung. Mit sinkendem Pegel
         entsteht ein Luftraum für die Wurzeln.],
       [Verworfen als Hauptverfahren, da ohne Aktor keine Automatisierungsaufgabe
         entsteht. Empfohlen als Überbrückung ohne Pumpe (@kap-ohne-betrieb).],
       [Aeroponik],
       [Die Wurzeln hängen frei und werden mit Nährlösung besprüht.],
-      [Verworfen. Düsen und Druckpumpe sind aufwendig und verstopfen leicht; bei
+      [Verworfen. Düsen und Druckpumpe sind aufwendig und verstopfen leicht, und bei
         einem Pumpenausfall trocknen die Wurzeln schnell aus.],
     ),
   ),
   caption: [Vergleich hydroponischer Verfahren],
 ) <tab-verfahren>
 
-Der Nachteil von NFT ist die Abhängigkeit von der Pumpe: Fällt sie aus oder
+Der Nachteil von NFT ist die Abhängigkeit von der Pumpe. Fällt sie aus oder
 läuft das Reservoir leer, werden die Wurzeln in der Rinne nicht mehr versorgt.
 Gerade daraus ergibt sich die Automatisierungsaufgabe, Pumpe und Füllstand zu
 überwachen.
 
 Abweichend vom klassischen NFT, bei dem die Pumpe dauerhaft läuft, wird die
-Pumpe im Intervall betrieben: 15 min Laufzeit, 45 min Pause. Das senkt den
-Stromverbrauch der Pumpe und soll in den Pausen die Belüftung der Wurzeln
+Pumpe im Intervall mit 15 min Laufzeit und 45 min Pause betrieben. Das senkt
+den Stromverbrauch der Pumpe und soll in den Pausen die Belüftung der Wurzeln
 verbessern. Der Aufbau bleibt ein NFT-System mit geneigter Rinne und
-Rücklauf; geändert ist nur der Betrieb der Pumpe.
+Rücklauf. Geändert ist nur der Betrieb der Pumpe.
 
 == Systemarchitektur
 
@@ -111,10 +112,10 @@ elektrische Umsetzung beschreibt @kap-schaltplan.
       align: left,
       table.header([Funktion], [Bauteil], [Prinzip und Begründung]),
       [Temperatur], [DS18B20],
-      [Digital, werkseitig kalibriert, OneWire; liefert auch die Temperatur
-        für die EC-Kompensation.],
+      [Digitaler, werkseitig kalibrierter Sensor am OneWire-Bus, der auch die
+        Temperatur für die EC-Kompensation liefert.],
       [Leitfähigkeit], [TDS-Sensor],
-      [Zwei Elektroden mit Wechselspannung (keine Elektrolyse); Ausgang
+      [Zwei Elektroden mit Wechselspannung (keine Elektrolyse), Ausgang
         0–2,3 V.],
       [Füllstand], [XKC-Y25-NPN],
       [Kapazitiv durch die Behälterwand, ohne Kontakt zur Lösung.],
@@ -131,7 +132,7 @@ elektrische Umsetzung beschreibt @kap-schaltplan.
 
 Der TDS-Sensor ist nach der Größe #gls("tds") benannt, der Menge gelöster
 Feststoffe in #gls("ppm"). Sie wird aus der Leitfähigkeit mit einem
-geräteabhängigen Faktor berechnet; die Firmware nutzt passend zum
+geräteabhängigen Faktor berechnet. Die Firmware nutzt passend zum
 Handheld-Gerät den Faktor 0,5 („ppm \@ 500“). Leitgröße ist deshalb die
 Leitfähigkeit.
 
@@ -157,18 +158,18 @@ Drei Status-LEDs zeigen den Zustand des Systems (@tab-status).
 
 Die grüne LED blinkt bewusst, statt dauerhaft zu leuchten. Ein Dauerlicht wäre
 nicht von einem Absturz zu unterscheiden, bei dem der Ausgang auf High hängen
-geblieben ist; das Blinken beweist dagegen, dass die Hauptschleife tatsächlich
+geblieben ist. Das Blinken beweist dagegen, dass die Hauptschleife tatsächlich
 durchlaufen wird.
 
 Eine Leitfähigkeit außerhalb des Zielbereichs löst keinen Alarm aus. Sie ist
 keine akute Gefahr für die Anlage, und die Korrektur erfolgt ohnehin von Hand.
-Das Display zeigt die Abweichung mit einem Pfeil nach oben oder unten an; liegt
+Das Display zeigt die Abweichung mit einem Pfeil nach oben oder unten an. Liegt
 der Wert im Zielbereich, erscheint ein Haken. Dieselbe Bewertung gilt für die
 Temperatur. So ist der Zustand ohne Kenntnis der Zielbereiche ablesbar.
 
 Die zentrale Schutzfunktion ist die Pumpenverriegelung. Der Pumpenausgang wird
-in jedem Schleifendurchlauf aus zwei Bedingungen gebildet: dem Sollzustand aus
-dem Zeitplan und dem aktuellen Signal des Füllstandssensors. Nur wenn beide
+in jedem Schleifendurchlauf aus dem Sollzustand des Zeitplans und dem aktuellen
+Signal des Füllstandssensors gebildet. Nur wenn beide
 erfüllt sind, läuft die Pumpe. Es gibt keinen Pfad, über den die Pumpe ohne
 aktive Füllstandsprüfung anläuft, und auch eine laufende Pumpe wird sofort
 abgeschaltet, sobald der Füllstand unter die Sensorhöhe fällt. Beim Start setzt
@@ -193,7 +194,7 @@ Die Umsetzung weicht in mehreren Punkten vom Projektauftrag ab
       [Beleuchtung über Relaismodul], [Growlight mit eigenem Timer],
       [Das Growlight nimmt 2 A auf und hätte zusammen mit der Pumpe das
         USB-Netzteil der Pumpe überlastet (@tab-strombilanz). Der feste Lichtzyklus
-        benötigt keine Sensordaten; der Timer ist bereits integriert.],
+        benötigt keine Sensordaten, und der Timer ist bereits integriert.],
       [Schwimmerschalter], [Kapazitiver Sensor XKC-Y25-NPN],
       [Keine beweglichen Teile und kein Kontakt mit der Nährlösung. Der Sensor
         lässt sich außen an der Wand verschieben, wodurch der Alarm vorführbar
@@ -201,11 +202,11 @@ Die Umsetzung weicht in mehreren Punkten vom Projektauftrag ab
       [Daten per WLAN bereitstellen], [Lokale Anzeige],
       [Messwerte, Bewertung und Zustand werden am Gerät angezeigt. Für den
         Einsatz als Demo-Objekt steht die Ablesbarkeit vor Ort im Vordergrund
-        (K6); eine Netzwerkanbindung wurde nicht umgesetzt.],
+        (K6). Eine Netzwerkanbindung wurde nicht umgesetzt.],
       [Kontinuierliche Umspülung], [Intervall 15 min / 45 min],
       [Geringerer Stromverbrauch, Belüftung der Wurzeln in den Pausen
         (@kap-verfahren).],
-      [—], [Zusätzlich: Leitfähigkeit],
+      [—], [Leitfähigkeit (zusätzlich)],
       [Die Nährstoffkonzentration ist neben der Temperatur die wichtigste Größe
         der Nährlösung und wurde ergänzt.],
     ),

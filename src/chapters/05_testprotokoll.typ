@@ -16,7 +16,7 @@ kontinuierliche Datenaufzeichnung fand nicht statt, ebenso kein Langzeitbetrieb
 mit protokolliertem Verlauf. Die Dokumentation erfolgte nachträglich anhand von
 Fotos und Notizen. Da der Aufbau nach der Abgabe nicht mehr besteht, konnten die
 Tests weder wiederholt noch um Messreihen ergänzt werden. Die Beobachtungen sind
-deshalb qualitativ wiedergegeben; Zahlenwerte stehen nur dort, wo sie während
+deshalb qualitativ wiedergegeben. Zahlenwerte stehen nur dort, wo sie während
 der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
 
 == Testfälle
@@ -31,7 +31,7 @@ der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
   beobachtung: [Der Messwert folgte dem Wechsel zwischen kaltem und warmem
     Wasser in der erwarteten Richtung, und die rote Alarm-LED zeigte die
     Temperatur außerhalb des Zielbereichs an. Ein Abgleich gegen ein
-    Referenzthermometer fand nicht statt; die absolute Genauigkeit stützt sich
+    Referenzthermometer fand nicht statt. Die absolute Genauigkeit stützt sich
     allein auf die Werkskalibrierung des Sensors.],
   bewertung: "erfüllt",
 )
@@ -44,14 +44,15 @@ der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
   vorgehen: [Die Kalibrierung diente zugleich als Test. Im Kalibriermodus der
     Firmware (@kap-software) blieb die Pumpe gesperrt, angezeigt wurde die
     Rohspannung des Sensors. Sensor und Handheld-Messgerät wurden in drei
-    Lösungen unterschiedlicher Leitfähigkeit gemessen; die Spannung wurde mit
-    der Temperatur des DS18B20 auf 25 °C kompensiert (@kap-kalibrierung).],
+    Lösungen unterschiedlicher Leitfähigkeit gemessen. Die Spannung wurde
+    anschließend mit der Temperatur des DS18B20 auf 25 °C kompensiert
+    (@kap-kalibrierung).],
   beobachtung: [Die kompensierte Spannung stieg mit der Leitfähigkeit des
     Handheld-Geräts an, nicht linear (@tab-kalibrierung). Die quadratische
     Kennlinie verläuft per Konstruktion exakt durch alle drei Punkte und ist
-    damit kein unabhängiger Nachweis der Genauigkeit. Eine Kontrollmessung an einem vierten Punkt fand
-    nicht statt; das Handheld-Gerät selbst wurde nicht gegen eine
-    Referenzlösung geprüft.],
+    damit kein unabhängiger Nachweis der Genauigkeit. Eine Kontrollmessung an
+    einem vierten Punkt fand nicht statt, und auch das Handheld-Gerät selbst
+    wurde nicht gegen eine Referenzlösung geprüft.],
   bewertung: "teilweise erfüllt",
 )
 
@@ -79,14 +80,13 @@ der Tests notiert wurden (Kalibrierpunkte in @tab-kalibrierung).
     bewegt und die Reaktion der Pumpe beobachtet. Außerdem wurde der Pumpentakt
     im Normalbetrieb beobachtet. Der Leistungspfad war dabei mit dem
     1000-µF-Kondensator an VIN bestückt (@kap-schaltplan).],
-  beobachtung: [Die Pumpe reagierte auf den Füllstandssensor: Erkannte er
-    keine Flüssigkeit, lief sie nicht. Im Betrieb floss die Nährlösung durch
-    das Rohr zurück in das Reservoir; der Kreislauf funktionierte. Der Takt
-    entsprach der Vorgabe von
-    15 min Laufzeit und 45 min Pause. Beim Anlauf der Pumpe wurde der ESP32
-    nicht zurückgesetzt. Ein Betrieb ohne Kondensator wurde nicht getestet; ob
-    der Kondensator für den stabilen Betrieb notwendig ist, ist daher nicht
-    belegt.],
+  beobachtung: [Die Pumpe reagierte auf den Füllstandssensor und lief nicht,
+    solange er keine Flüssigkeit erkannte. Im Betrieb funktionierte der
+    Kreislauf, die Nährlösung floss durch das Rohr zurück in das Reservoir. Der
+    Takt entsprach der Vorgabe von 15 min Laufzeit und 45 min Pause. Beim
+    Anlauf der Pumpe wurde der ESP32 nicht zurückgesetzt. Ein Betrieb ohne
+    Kondensator wurde nicht getestet. Ob der Kondensator für den stabilen
+    Betrieb notwendig ist, ist daher nicht belegt.],
   bewertung: "erfüllt",
 )
 
@@ -113,5 +113,5 @@ Ergebnis zu.
 ) <tab-soll-ist>
 
 Damit ist der Kern der technischen Problemstellung nachgewiesen (K1, K3–K5).
-K6 wurde nicht geprüft, da keine Erprobung mit Schülern stattfand; die
+K6 wurde nicht geprüft, da keine Erprobung mit Schülern stattfand. Die
 Einschränkungen bei K2 und K6 greift @kap-fazit auf.
